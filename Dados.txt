@@ -1,4 +1,0 @@
-netsh wlan set hostednetwork mode=allow ssid=rede key=12345678
-netsh wlan start hostednetwork
-MSRA
-Jp@19931996
