@@ -1,2 +1,0 @@
-# Mini-Mundo
-Trabalho Final
