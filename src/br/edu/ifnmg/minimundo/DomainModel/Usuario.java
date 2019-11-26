@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package minimundo.DomainModel;
+package br.edu.ifnmg.minimundo.DomainModel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,8 +16,7 @@ public class Usuario  {
      private int id;    
     private String nome;
     private String cpf;
-    private Sexo sexo;
-    private List<String> telefones;    
+    private String telefone;    
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     
     
@@ -29,18 +26,16 @@ public Usuario() {
         this.id = 0;
         this.nome = "";
         this.cpf = "00000000000";
-        this.sexo = Sexo.F;
-        this.telefones = new ArrayList<>();
+        this.telefone = "";
 
 
     }
 
-public Usuario(int id, String nome, String cpf, Sexo sexo, List<String> telefones) {
+public Usuario(int id, String nome, String cpf, String telefones) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.sexo = sexo;
-        this.telefones = telefones;
+        this.telefone = telefone;
     }   
      
 
@@ -78,20 +73,13 @@ public Usuario(int id, String nome, String cpf, Sexo sexo, List<String> telefone
             throw new ErroValidacaoException("CPF Inválido!");
     }
 
-    public Sexo getSexo() {
-        return sexo;
+   
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setSexo(Sexo sexo) {
-        this.sexo = sexo;
-    }
-
-    public List<String> getTelefones() {
-        return telefones;
-    }
-
-    public void setTelefones(List<String> telefones) {
-        this.telefones = telefones;
+    public void setTelefone(String telefones) {
+        this.telefone = telefone;
     }
 
     @Override
@@ -100,7 +88,7 @@ public Usuario(int id, String nome, String cpf, Sexo sexo, List<String> telefone
         hash = 53 * hash + this.id;
         hash = 53 * hash + Objects.hashCode(this.nome);
         hash = 53 * hash + Objects.hashCode(this.cpf);
-        hash = 53 * hash + Objects.hashCode(this.telefones);
+        hash = 53 * hash + Objects.hashCode(this.telefone);
         return hash;
     }
 

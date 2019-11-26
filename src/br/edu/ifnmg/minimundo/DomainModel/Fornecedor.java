@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package minimundo.DomainModel;
+package br.edu.ifnmg.minimundo.DomainModel;
 
 import java.util.ArrayList;
 import java.util.List;
