@@ -11,13 +11,19 @@ public class Cliente {
     private int id;    
     private String nome;
     private String cpf;
+    private String email;
+    private List<String> telefones;
+    
+    //endereço
     private String bairro;
     private Estado estado;
     private String rua;
     private String cidade;
     private int numero;
     private String complemento;
-    private List<String> telefones; 
+    private String cep;
+    
+     
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     
     
@@ -28,26 +34,34 @@ public Cliente() {
         this.nome = "";
         this.cpf = "00000000000";       
         this.telefones = new ArrayList<>();
+        this.email = "";
+        //Endereço
         this.bairro = "";
         this.cidade = "";
         this.complemento = "";
         this.estado = Estado.MG;
         this.numero = 0;
         this.rua = "";
+        this.cep = "";
+        
     }
 
 
-public Cliente(int id, String nome, String cpf, List<String> telefones,String bairro,String estado,String rua,String cidade,int numero,String complemento) {
+public Cliente(int id, String nome, String cpf, List<String> telefones,String email,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;        
         this.telefones = telefones;
+        this.email = email;
+        //Endereço
         this.bairro = bairro;
         this.cidade = cidade;
         this.complemento = complemento;
         this.estado = Estado.MG;
         this.numero = numero;
         this.rua = rua;
+        this.cep = cep;
+        
         
     }        
 
@@ -116,6 +130,14 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String ba
     public void setNumero(int numero) {
         this.numero = numero;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
       
     
     
@@ -153,6 +175,26 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String ba
     public void setTelefones(List<String> telefones) {
         this.telefones = telefones;
     }
+    
+    public void addTelefone(String telefone){
+        if(! this.telefones.contains(telefone))
+            this.telefones.add(telefone);
+    }
+    
+    public void removeTelefone(String telefone){
+        if(this.telefones.contains(telefone))
+            this.telefones.remove(telefone);
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -186,7 +228,7 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String ba
     }
 
     
-    
+ 
     @Override
     public String toString() {
         return "Cliente{" + "id=" + id + ", nome=" + nome + '}';

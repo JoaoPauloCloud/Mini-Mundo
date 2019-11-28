@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package br.edu.ifnmg.minimundo.DomainModel;
-
 /**
  *
  * @author Joao Paulo

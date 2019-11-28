@@ -13,10 +13,13 @@ import java.util.regex.Pattern;
  * @author Joao Paulo
  */
 public class Usuario  {
-     private int id;    
+    
+    private int id;    
     private String nome;
     private String cpf;
-    private String telefone;    
+    private String telefone;
+    private String usuario;
+    private String senha;    
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     
     
@@ -27,15 +30,19 @@ public Usuario() {
         this.nome = "";
         this.cpf = "00000000000";
         this.telefone = "";
+        this.usuario = "";
+        this.senha = "";         
 
 
     }
 
-public Usuario(int id, String nome, String cpf, String telefones) {
+public Usuario(int id, String nome, String cpf, String telefone, String usuario, String senha) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
+        this.usuario = usuario;
+        this.senha = senha;
     }   
      
 
@@ -81,6 +88,24 @@ public Usuario(int id, String nome, String cpf, String telefones) {
     public void setTelefone(String telefones) {
         this.telefone = telefone;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    
 
     @Override
     public int hashCode() {
