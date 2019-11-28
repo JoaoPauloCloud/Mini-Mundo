@@ -24,10 +24,10 @@ public class ItemCompraRepositoro extends BancoDados{
             
             if(itemcompra.getId() == 0){
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("insert into ItemCompras(cliente_id, usuario_id) values(?,?)",
+                        .prepareStatement("insert into ItemCompras(fornecedor_id, usuario_id) values(?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
-                sql.setInt(1,  itemcompra.getCliente_id().getId());
+                sql.setInt(1,  itemcompra.getFornecedor_id().getId());
                 sql.setInt(2, itemcompra.getUsuario_id().getId());
 
                 if(sql.executeUpdate() > 0){ 
@@ -43,7 +43,7 @@ public class ItemCompraRepositoro extends BancoDados{
                     return false;
             } else {
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("update ItemCompras set cliente_id = ?, usuario_id = ? where id = ?");
+                        .prepareStatement("update ItemCompras set fornecedor_id = ?, usuario_id = ? where id = ?");
 
                 sql.setInt(1,  itemcompra.getFornecedor_id().getId());
                 sql.setInt(2, itemcompra.getUsuario_id().getId());

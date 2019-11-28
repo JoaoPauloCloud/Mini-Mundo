@@ -5,21 +5,28 @@
  */
 package br.edu.ifnmg.minimundo.DomainModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Joao Paulo
  */
 public class ItemCompra {
      private int id;
-    private int fornecedor_id;
-    private int usuario_id;
-    private int produto_id;
+    private Fornecedor fornecedor_id;
+    private Usuario usuario_id;
+    private List<Produto> produtos;
     //private data date;
     private float valor;
     private int quantidade;
     private int unidade;
     //Valor total
-    private float vt;    
+    private float vt; 
+    
+    public ItemCompra (){
+     this.produtos = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -29,28 +36,28 @@ public class ItemCompra {
         this.id = id;
     }
 
-    public int getFornecedor_id() {
+    public Fornecedor getFornecedor_id() {
         return fornecedor_id;
     }
 
-    public void setFornecedor_id(int fornecedor_id) {
+    public void setFornecedor_id(Fornecedor fornecedor_id) {
         this.fornecedor_id = fornecedor_id;
     }
 
-    public int getUsuario_id() {
+    public Usuario getUsuario_id() {
         return usuario_id;
     }
 
-    public void setUsuario_id(int usuario_id) {
+    public void setUsuario_id(Usuario usuario_id) {
         this.usuario_id = usuario_id;
     }
 
-    public int getProduto_id() {
-        return produto_id;
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setProduto_id(int produto_id) {
-        this.produto_id = produto_id;
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public float getValor() {
@@ -84,4 +91,6 @@ public class ItemCompra {
     public void setVt(float vt) {
         this.vt = vt;
     }
+
+   
 }
