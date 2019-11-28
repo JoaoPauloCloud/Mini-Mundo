@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.minimundo.Persistence;
 
+import br.edu.ifnmg.minimundo.DomainModel.ItemCompra;
 import br.edu.ifnmg.minimundo.DomainModel.ItemVenda;
 import br.edu.ifnmg.minimundo.DomainModel.Produto;
 import java.sql.PreparedStatement;
@@ -12,34 +13,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 /**
  *
  * @author Joao Paulo
  */
-public class ItemVendaRepositorio extends BancoDados {
+public class ItemCompraRepositoro extends BancoDados{
     
-    public ItemVendaRepositorio() {
-        super();
-    }
-    
-    public boolean Salvar(ItemVenda itemvenda){
+    public boolean Salvar(ItemCompra itemcompra){
         try {
             
-            if(itemvenda.getId() == 0){
+            if(itemcompra.getId() == 0){
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("insert into ItemVendas(cliente_id, usuario_id) values(?,?)",
+                        .prepareStatement("insert into ItemCompras(cliente_id, usuario_id) values(?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
-                sql.setInt(1,  itemvenda.getCliente_id().getId());
-                sql.setInt(2, itemvenda.getUsuario_id().getId());
+                sql.setInt(1,  itemcompra.getCliente_id().getId());
+                sql.setInt(2, itemcompra.getUsuario_id().getId());
 
                 if(sql.executeUpdate() > 0){ 
                     ResultSet chave = sql.getGeneratedKeys();
                     chave.next();
-                    itemvenda.setId(chave.getInt(1));
+                    itemcompra.setId(chave.getInt(1));
                     
-                    insere_produtos(itemvenda);
+                    insere_produtos(itemcompra);
                     
                     return true;
                 }
@@ -47,22 +43,22 @@ public class ItemVendaRepositorio extends BancoDados {
                     return false;
             } else {
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("update ItemVendas set cliente_id = ?, usuario_id = ? where id = ?");
+                        .prepareStatement("update ItemCompras set cliente_id = ?, usuario_id = ? where id = ?");
 
-                sql.setInt(1,  itemvenda.getCliente_id().getId());
-                sql.setInt(2, itemvenda.getUsuario_id().getId());
-                sql.setInt(3, itemvenda.getId());
+                sql.setInt(1,  itemcompra.getFornecedor_id().getId());
+                sql.setInt(2, itemcompra.getUsuario_id().getId());
+                sql.setInt(3, itemcompra.getId());
 
                 if(sql.executeUpdate() > 0) {
                     
                     PreparedStatement sql2 = this.getConexao()
                         .prepareStatement("delete from ListaVendas where ItemVendas_id = ?");
                     
-                    sql2.setInt(1, itemvenda.getId());
+                    sql2.setInt(1, itemcompra.getId());
                     
                     sql2.executeUpdate();
                     
-                    insere_produtos(itemvenda);
+                    insere_produtos(itemcompra);
                     
                     return true;
                 }
@@ -79,16 +75,14 @@ public class ItemVendaRepositorio extends BancoDados {
         
     }
 
-    private void insere_produtos(ItemVenda itemvenda) throws SQLException {
-        for(Produto produto : itemvenda.getProdutos()){
+    private void insere_produtos(ItemCompra itemcompra) throws SQLException {
+        for(Produto produto : itemcompra.getProdutos()){
             PreparedStatement sql2 = this.getConexao()
-                    .prepareStatement("insert into ListaVendas(itemvenda_id, produto_id) values(?,?)");
-            sql2.setInt(1, itemvenda.getId());
+                    .prepareStatement("insert into ListaVendas(itemcompra_id, produto_id) values(?,?)");
+            sql2.setInt(1, itemcompra.getId());
             sql2.setInt(2, produto.getId());
             sql2.executeUpdate();
         }
         
     }
-    
-    
 }
