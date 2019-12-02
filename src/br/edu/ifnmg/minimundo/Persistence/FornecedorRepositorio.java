@@ -26,25 +26,32 @@ public class FornecedorRepositorio extends BancoDados {
             
             if(obj.getId() == 0){
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("insert into Fornecedores(cnpj, rs, email, bairro, estado, rua, cidade, numero, complemento, cep) values(?,?,?,?,?,?,?,?,?,?)",
+                        .prepareStatement("insert into fornecedores(cnpj, rs, email, bairro, estado, rua, cidade, numero, complemento,cep) values(?,?,?,?,?,?,?,?,?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
-
-                sql.setString(1, obj.getcnpj());
-                sql.setString(2, obj.getRs());
+                
+                sql.setString(1, obj.getcnpj());               
+                sql.setString(2, obj.getRs());                
                 sql.setString(3, obj.getEmail());
                 //Endereço
-                sql.setString(4, obj.getBairro());                
+                sql.setString(4, obj.getBairro());               
                 sql.setString(5, obj.getEstado().name());
                 sql.setString(6, obj.getRua());
                 sql.setString(7, obj.getCidade());
                 sql.setInt(8, obj.getNumero());
                 sql.setString(9, obj.getComplemento());
                 sql.setString(10, obj.getCep());
-
+                
+                if(sql.executeUpdate() > 0){ 
+                    ResultSet chave = sql.getGeneratedKeys();
+                    chave.next();
+                    obj.setId(chave.getInt(1));
+                    return true;
+                }
+                
                 } else {
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("update Fornecedores set cnpj = ?, rs = ?, email = ?, bairro = ?, estado = ?, rua = ?, cidade = ?, numero = ?, complemento = ?, cep = ? where id = ?");
-
+                        .prepareStatement("update fornecedores set cnpj = ?, rs = ?, email = ?, bairro = ?, estado = ?, rua = ?, cidade = ?, numero = ?, complemento = ?, cep = ? where id = ?");
+                
                 sql.setString(1, obj.getcnpj());
                 sql.setString(2, obj.getRs());
                 sql.setString(3, obj.getEmail());
@@ -53,7 +60,7 @@ public class FornecedorRepositorio extends BancoDados {
                 sql.setString(5, obj.getEstado().name());
                 sql.setString(6, obj.getRua());
                 sql.setString(7, obj.getCidade());
-                sql.setInt(8, obj.getNumero());
+                sql.setInt(8, 1234);
                 sql.setString(9, obj.getComplemento());                
                 sql.setString(10, obj.getCep());
                 //ID do fornecedor

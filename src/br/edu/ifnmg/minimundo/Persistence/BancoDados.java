@@ -26,7 +26,7 @@ public class BancoDados {
             Class.forName("com.mysql.jdbc.Driver");      // Carrega o Driver do MySQL na memória
             
             
-            conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/MiniMundo","root","");   // Conecta ao banco de dados
+            conexao = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/minimundo","root","");   // Conecta ao banco de dados
             
         }  catch (ClassNotFoundException ex) {
             System.out.println("Driver do banco de dados não foi encontrado!");
@@ -40,7 +40,14 @@ public class BancoDados {
     public Connection getConexao() {
         return conexao;
     } 
-      
-    
-    
+
+
+    public void conexao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void executaSql(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

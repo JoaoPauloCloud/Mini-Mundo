@@ -41,9 +41,10 @@ public class Fornecedor {
         this.bairro = "";
         this.cidade = "";
         this.complemento = "";
-        this.estado = Estado.MG;
+        this.estado = Estado.AC;
         this.numero = 0;
         this.rua = "";
+        this.cep = "";
         
         
         
@@ -90,14 +91,14 @@ public class Fornecedor {
             throw new ErroValidacaoException("CNPJ Inválido!");
     }
 
-    public String getCnpj() {
+   /* public String getCnpj() {
         return cnpj;
     }
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-
+*/
     public String getRs() {
         return rs;
     }

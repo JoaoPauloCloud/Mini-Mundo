@@ -144,6 +144,8 @@ public Usuario(int id, String nome, String cpf, String telefone, String usuario,
     public String toString() {
         return "Usuario{" + "id=" + id + ", nome=" + nome + '}';
     }
+
+    
     
     
     

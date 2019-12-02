@@ -28,19 +28,21 @@ public class ClienteRepositorio extends BancoDados {
             
             if(obj.getId() == 0){
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("insert into Clientes(nome, cpf, bairro, estado, rua, cidade, numero, complemento, email, cep) values(?,?,?,?,?,?,?,?,?,?)",
+                        .prepareStatement("insert into clientes(nome, cpf, status, email, bairro, estado, rua, cidade, numero, complemento,  cep) values(?,?,?,?,?,?,?,?,?,?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
 
                 sql.setString(1, obj.getNome());
-                sql.setString(2, obj.getCpf().replace(".", "").replace("-", ""));
-                sql.setString(3, obj.getBairro());                
-                sql.setString(4, obj.getEstado().name());
-                sql.setString(5, obj.getRua());
-                sql.setString(6, obj.getCidade());
-                sql.setInt(7, obj.getNumero());
-                sql.setString(8, obj.getComplemento());
-                sql.setString(9, obj.getEmail());
-                sql.setString(10, obj.getCep());
+                sql.setString(2, obj.getCpf().replace(".", "").replace("-", "").toString());
+                sql.setInt(3, 1);
+                System.out.println(obj.getEstado().name());
+                sql.setString(4, obj.getEmail());
+                sql.setString(5, obj.getBairro());                
+                sql.setString(6, obj.getEstado().name());
+                sql.setString(7, obj.getRua());
+                sql.setString(8, obj.getCidade());
+                sql.setInt(9, obj.getNumero());
+                sql.setString(10, obj.getComplemento());                
+                sql.setString(11, obj.getCep());
 
                 if(sql.executeUpdate() > 0){ 
                     ResultSet chave = sql.getGeneratedKeys();
@@ -170,6 +172,7 @@ public class ClienteRepositorio extends BancoDados {
     }
     
     public List<Cliente> Buscar(Cliente filtro){
+        
         try {
             
             String where = "";
@@ -192,7 +195,7 @@ public class ClienteRepositorio extends BancoDados {
                 }
             }
             
-            String consulta = "select * from Clientes";
+            String consulta = "select * from clientes";
             
             if(where.length() >0 )
                 consulta += " where " + where;
@@ -212,6 +215,7 @@ public class ClienteRepositorio extends BancoDados {
                 cliente.setId( resultado.getInt("id"));
                 cliente.setNome( resultado.getString("nome"));
                 cliente.setCpf( resultado.getString("cpf"));
+                cliente.setCpf( resultado.getString("statu"));
                 cliente.setBairro( resultado.getString("bairro"));
                 cliente.setEstado( Estado.valueOf(resultado.getString("estado")));
                 cliente.setRua( resultado.getString("rua"));

@@ -22,7 +22,7 @@ public class Cliente {
     private int numero;
     private String complemento;
     private String cep;
-    
+    private int statu;
      
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     
@@ -35,11 +35,12 @@ public Cliente() {
         this.cpf = "00000000000";       
         this.telefones = new ArrayList<>();
         this.email = "";
+        this.statu = 0;
         //Endereço
         this.bairro = "";
         this.cidade = "";
         this.complemento = "";
-        this.estado = Estado.MG;
+        this.estado = Estado.AC;
         this.numero = 0;
         this.rua = "";
         this.cep = "";
@@ -47,12 +48,13 @@ public Cliente() {
     }
 
 
-public Cliente(int id, String nome, String cpf, List<String> telefones,String email,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
+public Cliente(int id, String nome, String cpf, List<String> telefones,String email,int statu,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;        
         this.telefones = telefones;
         this.email = email;
+        this.statu = statu;
         //Endereço
         this.bairro = bairro;
         this.cidade = cidade;
@@ -107,11 +109,11 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
         return estado;
     }
 
-    public void setEstado(Estado estado) throws ErroValidacaoException {
-        if(nome.length() < 2)
-            throw new ErroValidacaoException(" * campo Obrigatorio ");
+   
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
+    
     //buscar,alterar o nome da rua
     public String getRua() {
         return rua;
@@ -192,6 +194,14 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public int getStatu() {
+        return statu;
+    }
+
+    public void setStatu(int statu) {
+        this.statu = statu;
     }
     
     

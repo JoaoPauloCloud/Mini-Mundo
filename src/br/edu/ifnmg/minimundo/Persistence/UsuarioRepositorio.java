@@ -6,12 +6,16 @@
 package br.edu.ifnmg.minimundo.Persistence;
 
 import br.edu.ifnmg.minimundo.DomainModel.Usuario;
+import java.sql.Connection;
+//import br.edu.ifnmg.minimundo.Persistence.BancoDados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -151,4 +155,44 @@ public class UsuarioRepositorio extends BancoDados {
         return null;
     }
     
+        public boolean checkLogin(Usuario filtro){
+        
+        
+        boolean check = false;
+        
+        
+        try{
+            
+            String where = "";
+            //verificando se os campos não estão vazius 
+            if((filtro.getUsuario() == null && filtro.getUsuario().isEmpty())||(filtro.getSenha() == null && filtro.getSenha().isEmpty())){         
+                
+                return check;  
+             
+            }
+            
+            PreparedStatement sql = this.getConexao()
+                        .prepareStatement("SELECT * FROM usuarios where usuario = ? and senha = ?",
+                                Statement.RETURN_GENERATED_KEYS);
+
+                sql.setString(1, filtro.getUsuario());
+                sql.setString(2, filtro.getSenha());     
+                     
+                     
+        
+        ResultSet resultado = sql.executeQuery();
+        if(resultado.next()){        
+         
+            check = true;        
+        }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  
+    return check; 
+
+
+}
+        
 }

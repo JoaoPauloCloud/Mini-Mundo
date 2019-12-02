@@ -7,7 +7,7 @@ package br.edu.ifnmg.minimundo.Presentation.Console;
 
 /**
  *
- * @author bad worf
+ * @author Joao Paulo
  */
 public class MiniMundo {
 
