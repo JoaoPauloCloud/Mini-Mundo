@@ -48,11 +48,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TelaPrincipal");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/minimundo/Presentation/Imagens/img5.jpg"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 410, 290);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/minimundo/Presentation/Imagens/img4.jpg"))); // NOI18N
 
         jMenuBar2.setBorder(new javax.swing.border.MatteBorder(null));
         jMenuBar2.setOpaque(false);
@@ -124,30 +121,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar2);
 
-        setSize(new java.awt.Dimension(418, 341));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 791, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, Short.MAX_VALUE)
+        );
+
+        setSize(new java.awt.Dimension(807, 513));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // Abrindo tela de busca:
-        //BuscarCliente BC = new BuscarCliente();
         
-        //adicionando a Tela Principal
-        //this.add(BC);
-        
-        //Mostrando a tela
-        //BC.show();
-        new BuscarCliente().setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         new CadastraCliente().setVisible(true);
         this.dispose();
-        
-        
-        
+               
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed

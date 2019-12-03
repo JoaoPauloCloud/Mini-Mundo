@@ -6,14 +6,11 @@
 package br.edu.ifnmg.minimundo.Persistence;
 
 import br.edu.ifnmg.minimundo.DomainModel.Usuario;
-import java.sql.Connection;
-//import br.edu.ifnmg.minimundo.Persistence.BancoDados;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,14 +30,23 @@ public class UsuarioRepositorio extends BancoDados {
 
                 sql.setString(1, obj.getNome());
                 sql.setString(2, obj.getCpf().replace(".", "").replace("-", ""));
-                sql.setString(3, obj.getUsuario());                
+                sql.setString(3, obj.getUsuario());
                 sql.setString(4, obj.getSenha());
                 sql.setString(5, obj.getTelefone());
+                
+                if(sql.executeUpdate() > 0){ 
+                    ResultSet chave = sql.getGeneratedKeys();
+                    chave.next();
+                                        
+                    return true;
+                }
+                else
+                    return false;
 
                
             } else {
                 PreparedStatement sql = this.getConexao()
-                        .prepareStatement("update Clientes set nome = ?, cpf = ?, usuario = ?, senha = ?, tlefone = ? where id = ?");
+                        .prepareStatement("update Usuarios set nome = ?, cpf = ?, usuario = ?, senha = ?, tlefone = ? where id = ?");
 
                 sql.setString(1, obj.getNome());
                 sql.setString(2, obj.getCpf().replace(".", "").replace("-", ""));
@@ -49,7 +55,12 @@ public class UsuarioRepositorio extends BancoDados {
                 sql.setString(5, obj.getTelefone());
                 sql.setInt(6, obj.getId());
 
-                
+                if(sql.executeUpdate() > 0) {
+                    
+                    return true;
+                }
+                else
+                    return false;
             }
             
             
@@ -61,100 +72,31 @@ public class UsuarioRepositorio extends BancoDados {
         
     }
     
-    public Usuario Abrir(int id){
-        try {
+    public boolean checkAdmin(Usuario filtro){        
+        
+        boolean check = false;        
+        String login = "admin";
+        String senha = "1234";
+        
+        String where = "";
+        //verificando se os campos não estão vazius
+        if((filtro.getUsuario() == null && filtro.getUsuario().isEmpty())||(filtro.getSenha() == null && filtro.getSenha().isEmpty())){
             
-             PreparedStatement sql = this.getConexao()
-                     .prepareStatement("select * from Usuarios where id = ?");
-             
-             sql.setInt(1, id);
-             
-             ResultSet resultado = sql.executeQuery();
-             
-             
-             resultado.next();
-             
-             Usuario usuario = new Usuario();
-             
-             try {
-                usuario.setId( resultado.getInt("id"));
-                usuario.setNome( resultado.getString("nome"));
-                usuario.setCpf( resultado.getString("cpf"));
-                usuario.setUsuario( resultado.getString("usuario"));
-                usuario.setSenha( resultado.getString("senha"));
-                usuario.setTelefone( resultado.getString("telefone"));
-                
-             } catch(Exception ex){
-                 usuario = null;
-             }
-             
-             return usuario;
+            return check;
             
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
         }
         
-        return null;
-    }
-    
-    public List<Usuario> Buscar(Usuario filtro){
-        try {
+        
+        if(filtro.getUsuario().equals(login) && filtro.getSenha().equals(senha) ){
             
-            String where = "";
-            
-            if(filtro != null){
-                if(filtro.getNome() != null && !filtro.getNome().isEmpty())
-                    where += "nome like '%"+filtro.getNome() + "%'";
+            check = true;
+        }
+  
+    return check; 
 
-                if(filtro.getCpf() != null && !filtro.getCpf().isEmpty() && 
-                        !"000.000.000-00".equals(filtro.getCpf())){
-                    if(where.length() > 0)
-                        where += " and ";
-                    where += "cpf = '"+filtro.getCpf().replace(".", "").replace("-", "") + "'";
-                }
-            
-               
-            }
-            
-            String consulta = "select * from Usuarios";
-            
-            if(where.length() >0 )
-                consulta += " where " + where;
-            
-             PreparedStatement sql = this.getConexao()
-                     .prepareStatement(consulta);
-             
-             ResultSet resultado = sql.executeQuery();
-             
-             List<Usuario> usuarios = new ArrayList<>();
-             
-             while(resultado.next()) {
-             
-                Usuario usuario = new Usuario();
-                
-                try {
-                usuario.setId( resultado.getInt("id"));
-                usuario.setNome( resultado.getString("nome"));
-                usuario.setCpf( resultado.getString("cpf"));
-                usuario.setUsuario( resultado.getString("usuario"));
-                usuario.setSenha( resultado.getString("senha"));
-                usuario.setTelefone( resultado.getString("telefone"));
-                
-                } catch(Exception ex){
-                    usuario = null;
-                }
-                
-                usuarios.add(usuario);
-             }
-             return usuarios;
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
-        return null;
-    }
-    
+
+}
+
     public boolean checkLogin(Usuario filtro){
         
         

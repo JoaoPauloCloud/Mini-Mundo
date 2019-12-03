@@ -19,7 +19,8 @@ public class Usuario  {
     private String cpf;
     private String telefone;
     private String usuario;
-    private String senha;    
+    private String senha;
+    
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     
     
@@ -85,7 +86,7 @@ public Usuario(int id, String nome, String cpf, String telefone, String usuario,
         return telefone;
     }
 
-    public void setTelefone(String telefones) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -103,6 +104,16 @@ public Usuario(int id, String nome, String cpf, String telefone, String usuario,
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    
+
+    public Pattern getRegex_cpf() {
+        return regex_cpf;
+    }
+
+    public void setRegex_cpf(Pattern regex_cpf) {
+        this.regex_cpf = regex_cpf;
     }
     
     

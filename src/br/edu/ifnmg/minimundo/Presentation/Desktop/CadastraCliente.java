@@ -159,9 +159,9 @@ public class CadastraCliente extends javax.swing.JFrame {
                         .addComponent(txtcomplemento, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                         .addComponent(jLabel9)
                         .addComponent(txtestado)
-                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(numero)
-                        .addComponent(txtnumero))
+                        .addComponent(txtnumero)
+                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(1207, Short.MAX_VALUE))
         );

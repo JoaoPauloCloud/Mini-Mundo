@@ -7,13 +7,10 @@ package br.edu.ifnmg.minimundo.Persistence;
 
 
 import br.edu.ifnmg.minimundo.DomainModel.Cliente;
-import br.edu.ifnmg.minimundo.DomainModel.Estado;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +29,7 @@ public class ClienteRepositorio extends BancoDados {
                                 Statement.RETURN_GENERATED_KEYS);
 
                 sql.setString(1, obj.getNome());
-                sql.setString(2, obj.getCpf().replace(".", "").replace("-", "").toString());
+                sql.setString(2, obj.getCpf().replace(".", "").replace("-", ""));
                 sql.setInt(3, 1);
                 sql.setString(4, obj.getEmail());
                 sql.setString(5, obj.getBairro());                
@@ -48,7 +45,7 @@ public class ClienteRepositorio extends BancoDados {
                     chave.next();
                     obj.setId(chave.getInt(1));
                     SalvarTelefones(obj);
-                    //atualizarTelefones(obj);
+                    
                     
                     return true;
                 }
@@ -71,7 +68,7 @@ public class ClienteRepositorio extends BancoDados {
                 sql.setInt(11, obj.getId());
 
                 if(sql.executeUpdate() > 0) {
-                    //atualizarTelefones(obj);
+                    
                     return true;
                 }
                 else
@@ -95,9 +92,9 @@ public class ClienteRepositorio extends BancoDados {
                 if(values.length() > 0) 
                     values += ", ";
                 
-                values += "("+tef.getId()+",'"+telefone+"')";System.out.printf("cheguei..................."); }
+                values += "("+tef.getId()+",'"+telefone+"')"; }
             
-            for(String telefone : tef.getTelefones()){System.out.printf("cheguei..................."); 
+            for(String telefone : tef.getTelefones()){
                 PreparedStatement sql = this.getConexao()
                         .prepareStatement("insert into telefones(clientes_id,telefone) values(?,?)",
                                 Statement.RETURN_GENERATED_KEYS);
@@ -113,160 +110,6 @@ public class ClienteRepositorio extends BancoDados {
         
     }
     
-    
-    public void atualizarTelefones(Cliente cliente){
-        try {
-            PreparedStatement sql = this.getConexao()
-                    .prepareStatement("delete from telefones where cliente_id = ?");
-            
-            sql.setInt(1, cliente.getId());
-            
-            String values = "";
-            for(String telefone : cliente.getTelefones()){
-                if(values.length() > 0) 
-                    values += ", ";
-                
-                values += "("+cliente.getId()+",'"+telefone+"')";
-            }
-            
-            Statement sql2 = this.getConexao().createStatement();
-            
-            sql2.executeUpdate("insert into telefones(clientes_id, telefone) VALUES " + values);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteRepositorio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public Cliente Abrir(int id){
-        try {
-            
-             PreparedStatement sql = this.getConexao()
-                     .prepareStatement("select * from Clientes where id = ?");
-             
-             sql.setInt(1, id);
-             
-             ResultSet resultado = sql.executeQuery();
-             
-             
-             resultado.next();
-             
-             Cliente cliente = new Cliente();
-             
-             try {
-                cliente.setId( resultado.getInt("id"));
-                cliente.setNome( resultado.getString("nome"));
-                cliente.setCpf( resultado.getString("cpf"));
-                cliente.setBairro( resultado.getString("bairro"));
-                cliente.setEstado( Estado.valueOf(resultado.getString("estado")));
-                cliente.setRua( resultado.getString("rua"));
-                cliente.setCidade( resultado.getString("cidade"));
-                cliente.setNumero( resultado.getInt("numero"));
-                cliente.setComplemento( resultado.getString("complemento"));
-                cliente.setEmail( resultado.getString("email"));
-                cliente.setCep( resultado.getString("cep"));
-                abrirTelefones(cliente);
-             } catch(Exception ex){
-                 cliente = null;
-             }
-             
-             return cliente;
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
-        return null;
-    }
-    
-    public void abrirTelefones(Cliente cliente){
-        try {
-            PreparedStatement sql = this.getConexao()
-                    .prepareStatement("select telefone from Telefones where cliente_id = ?");
-            
-            sql.setInt(1, cliente.getId());
-            
-            ResultSet resultado = sql.executeQuery();
-            
-            while(resultado.next()){
-                cliente.addTelefone(resultado.getString("telefone"));
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(ClienteRepositorio.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public List<Cliente> Buscar(Cliente filtro){
-        
-        try {
-            
-            String where = "";
-            
-            if(filtro != null){
-                if(filtro.getNome() != null && !filtro.getNome().isEmpty())
-                    where += "nome like '%"+filtro.getNome() + "%'";
-
-                if(filtro.getCpf() != null && !filtro.getCpf().isEmpty() && 
-                        !"000.000.000-00".equals(filtro.getCpf())){
-                    if(where.length() > 0)
-                        where += " and ";
-                    where += "cpf = '"+filtro.getCpf().replace(".", "").replace("-", "") + "'";
-                }
-            
-                if(filtro.getEstado() != null ){
-                    if(where.length() > 0)
-                        where += " and ";
-                    where += "estado = '"+filtro.getEstado().name() +"'";
-                }
-            }
-            
-            String consulta = "select * from clientes";
-            
-            if(where.length() >0 )
-                consulta += " where " + where;
-            
-             PreparedStatement sql = this.getConexao()
-                     .prepareStatement(consulta);
-             
-             ResultSet resultado = sql.executeQuery();
-             
-             List<Cliente> clientes = new ArrayList<>();
-             
-             while(resultado.next()) {
-             
-                Cliente cliente = new Cliente();
-                
-                try {
-                cliente.setId( resultado.getInt("id"));
-                cliente.setNome( resultado.getString("nome"));
-                cliente.setCpf( resultado.getString("cpf"));
-                cliente.setCpf( resultado.getString("statu"));
-                cliente.setBairro( resultado.getString("bairro"));
-                cliente.setEstado( Estado.valueOf(resultado.getString("estado")));
-                cliente.setRua( resultado.getString("rua"));
-                cliente.setCidade( resultado.getString("cidade"));
-                cliente.setNumero( resultado.getInt("numero"));
-                cliente.setComplemento( resultado.getString("complemento"));
-                cliente.setEmail( resultado.getString("email"));
-                cliente.setCep( resultado.getString("cep"));
-                abrirTelefones(cliente);
-                } catch(Exception ex){
-                    cliente = null;
-                }
-                
-                clientes.add(cliente);
-             }
-             return clientes;
-            
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
-        return null;
-    }
-    
-    
-    
+  
     
 }

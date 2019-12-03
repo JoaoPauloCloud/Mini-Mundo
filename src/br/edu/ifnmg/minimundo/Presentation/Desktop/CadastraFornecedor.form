@@ -92,10 +92,10 @@
                                   <Component id="txtrua" alignment="0" pref="222" max="32767" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtestado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxEstado" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                   <Component id="txtcnpj" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
                                   <Component id="txtrs" alignment="0" min="-2" pref="168" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbxEstado" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtcomplemento" alignment="0" pref="222" max="32767" attributes="0"/>

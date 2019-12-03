@@ -5,9 +5,7 @@
  */
 package br.edu.ifnmg.minimundo.Presentation.Desktop;
 
-import br.edu.ifnmg.minimundo.DomainModel.Administrador;
 import br.edu.ifnmg.minimundo.DomainModel.Usuario;
-import br.edu.ifnmg.minimundo.Persistence.AdministradorRepositorio;
 import br.edu.ifnmg.minimundo.Persistence.UsuarioRepositorio;
 import javax.swing.JOptionPane;
 
@@ -17,10 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class TelaLogin extends javax.swing.JFrame {
     
-    Administrador admin;
+    
     UsuarioRepositorio repo;
     Usuario filtro;
-    AdministradorRepositorio rp;
+   
     /**
      * Creates new form Loguin
      */
@@ -28,8 +26,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         repo = new UsuarioRepositorio();
         filtro = new Usuario();
-        admin = new Administrador();
-        rp = new AdministradorRepositorio();
+        
     }
 
     /**
@@ -49,7 +46,7 @@ public class TelaLogin extends javax.swing.JFrame {
         btnentrar = new javax.swing.JButton();
         imagemcadeado = new javax.swing.JLabel();
         sejabemvindo = new javax.swing.JLabel();
-        txtsenha = new javax.swing.JTextField();
+        txtsenha = new javax.swing.JPasswordField();
         Fundo = new javax.swing.JLabel();
 
         jLabel1.setText("jLabel1");
@@ -106,14 +103,8 @@ public class TelaLogin extends javax.swing.JFrame {
         sejabemvindo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(sejabemvindo);
         sejabemvindo.setBounds(270, 60, 140, 30);
-
-        txtsenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtsenhaActionPerformed(evt);
-            }
-        });
         getContentPane().add(txtsenha);
-        txtsenha.setBounds(310, 170, 100, 30);
+        txtsenha.setBounds(310, 180, 100, 30);
 
         Fundo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         Fundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/minimundo/Presentation/Imagens/FUNDO.png"))); // NOI18N
@@ -135,28 +126,29 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsairActionPerformed
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
+              
         
         
         
-        admin.setLogin(txtusuario.getText());
-        admin.setSenha(txtsenha.getText());
-        if (rp.checkAdmin(admin)) {
-            new CadastraUsuario().setVisible(true);
-            this.dispose();
-        }/*else{
-          System.out.println(" cheguei");
-        //verificar se o campo do Usuario não esta vazio
+       //verificar se o campo do Usuario não esta vazio
         if (txtusuario.getText().length() > 0) {
             filtro.setUsuario(txtusuario.getText());
             //verificar se o campo da senha não esta vazia
-            if (txtsenha.getText().length() > 0) {
-                filtro.setSenha(txtsenha.getText());
-                //Verificando se usuario existe no Banco de dados
+            if (txtsenha.getPassword().length > 0) {
+                String password = new String(this.txtsenha.getPassword());
+                filtro.setSenha(password);
+                //Verificando se usuario existe
+                if (repo.checkAdmin(filtro)) {
+                    new CadastraUsuario().setVisible(true);
+                    this.dispose();
+                }else{
                 if (repo.checkLogin(filtro)) {
                     new TelaPrincipal().setVisible(true);
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(null, "Dados Incorretos");
+                }
+                
                 }
 
             } else {
@@ -165,13 +157,9 @@ public class TelaLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Usuario invalido");
         }
-        }*/
+
 
     }//GEN-LAST:event_btnentrarActionPerformed
-
-    private void txtsenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsenhaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtsenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,7 +205,7 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel sejabemvindo;
     private javax.swing.JLabel senha;
-    private javax.swing.JTextField txtsenha;
+    private javax.swing.JPasswordField txtsenha;
     private javax.swing.JTextField txtusuario;
     private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables

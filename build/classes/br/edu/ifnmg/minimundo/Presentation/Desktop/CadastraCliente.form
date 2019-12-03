@@ -99,9 +99,9 @@
                                   <Component id="txtcomplemento" alignment="0" pref="222" max="32767" attributes="0"/>
                                   <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtestado" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxEstado" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
                                   <Component id="numero" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtnumero" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cbxEstado" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jButton1" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
