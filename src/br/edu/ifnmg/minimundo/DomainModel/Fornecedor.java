@@ -58,7 +58,7 @@ public class Fornecedor {
         this.bairro = bairro;
         this.cidade = cidade;
         this.complemento = complemento;
-        this.estado = Estado.MG;
+        this.estado = Estado.AC;
         this.numero = numero;
         this.rua = rua;
         this.cep = cep;

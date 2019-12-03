@@ -5,7 +5,9 @@
  */
 package br.edu.ifnmg.minimundo.Presentation.Desktop;
 
+import br.edu.ifnmg.minimundo.DomainModel.Administrador;
 import br.edu.ifnmg.minimundo.DomainModel.Usuario;
+import br.edu.ifnmg.minimundo.Persistence.AdministradorRepositorio;
 import br.edu.ifnmg.minimundo.Persistence.UsuarioRepositorio;
 import javax.swing.JOptionPane;
 
@@ -14,10 +16,11 @@ import javax.swing.JOptionPane;
  * @author Joao Paulo
  */
 public class TelaLogin extends javax.swing.JFrame {
-
+    
+    Administrador admin;
     UsuarioRepositorio repo;
     Usuario filtro;
-
+    AdministradorRepositorio rp;
     /**
      * Creates new form Loguin
      */
@@ -25,7 +28,8 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         repo = new UsuarioRepositorio();
         filtro = new Usuario();
-
+        admin = new Administrador();
+        rp = new AdministradorRepositorio();
     }
 
     /**
@@ -131,6 +135,16 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsairActionPerformed
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
+        
+        
+        
+        admin.setLogin(txtusuario.getText());
+        admin.setSenha(txtsenha.getText());
+        if (rp.checkAdmin(admin)) {
+            new CadastraUsuario().setVisible(true);
+            this.dispose();
+        }/*else{
+          System.out.println(" cheguei");
         //verificar se o campo do Usuario não esta vazio
         if (txtusuario.getText().length() > 0) {
             filtro.setUsuario(txtusuario.getText());
@@ -151,7 +165,7 @@ public class TelaLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Usuario invalido");
         }
-
+        }*/
 
     }//GEN-LAST:event_btnentrarActionPerformed
 

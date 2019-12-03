@@ -34,7 +34,6 @@ public class ClienteRepositorio extends BancoDados {
                 sql.setString(1, obj.getNome());
                 sql.setString(2, obj.getCpf().replace(".", "").replace("-", "").toString());
                 sql.setInt(3, 1);
-                System.out.println(obj.getEstado().name());
                 sql.setString(4, obj.getEmail());
                 sql.setString(5, obj.getBairro());                
                 sql.setString(6, obj.getEstado().name());
@@ -48,8 +47,8 @@ public class ClienteRepositorio extends BancoDados {
                     ResultSet chave = sql.getGeneratedKeys();
                     chave.next();
                     obj.setId(chave.getInt(1));
-                    
-                    atualizarTelefones(obj);
+                    SalvarTelefones(obj);
+                    //atualizarTelefones(obj);
                     
                     return true;
                 }
@@ -72,7 +71,7 @@ public class ClienteRepositorio extends BancoDados {
                 sql.setInt(11, obj.getId());
 
                 if(sql.executeUpdate() > 0) {
-                    atualizarTelefones(obj);
+                    //atualizarTelefones(obj);
                     return true;
                 }
                 else
@@ -88,10 +87,37 @@ public class ClienteRepositorio extends BancoDados {
         
     }
     
+    public void SalvarTelefones(Cliente tef){
+        try {
+                       
+            String values = "";
+            for(String telefone : tef.getTelefones()){ 
+                if(values.length() > 0) 
+                    values += ", ";
+                
+                values += "("+tef.getId()+",'"+telefone+"')";System.out.printf("cheguei..................."); }
+            
+            for(String telefone : tef.getTelefones()){System.out.printf("cheguei..................."); 
+                PreparedStatement sql = this.getConexao()
+                        .prepareStatement("insert into telefones(clientes_id,telefone) values(?,?)",
+                                Statement.RETURN_GENERATED_KEYS);
+                             sql.setInt(1, tef.getId());
+                             sql.setInt(2, Integer.parseInt(telefone.trim()));
+                             int i = Integer.parseInt(telefone.trim());
+                             System.out.printf("telefone :",i);
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteRepositorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
     public void atualizarTelefones(Cliente cliente){
         try {
             PreparedStatement sql = this.getConexao()
-                    .prepareStatement("delete from Telefones where cliente_id = ?");
+                    .prepareStatement("delete from telefones where cliente_id = ?");
             
             sql.setInt(1, cliente.getId());
             
@@ -105,7 +131,7 @@ public class ClienteRepositorio extends BancoDados {
             
             Statement sql2 = this.getConexao().createStatement();
             
-            sql2.executeUpdate("insert into Telefones(cliente_id, telefone) VALUES " + values);
+            sql2.executeUpdate("insert into telefones(clientes_id, telefone) VALUES " + values);
             
         } catch (SQLException ex) {
             Logger.getLogger(ClienteRepositorio.class.getName()).log(Level.SEVERE, null, ex);

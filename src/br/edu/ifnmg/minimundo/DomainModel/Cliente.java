@@ -43,7 +43,7 @@ public Cliente() {
         this.estado = Estado.AC;
         this.numero = 0;
         this.rua = "";
-        this.cep = "";
+        this.cep = "00000000";
         
     }
 
@@ -59,7 +59,7 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
         this.bairro = bairro;
         this.cidade = cidade;
         this.complemento = complemento;
-        this.estado = Estado.MG;
+        this.estado = Estado.AC;
         this.numero = numero;
         this.rua = rua;
         this.cep = cep;

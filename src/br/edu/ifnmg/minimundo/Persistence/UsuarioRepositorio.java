@@ -155,7 +155,7 @@ public class UsuarioRepositorio extends BancoDados {
         return null;
     }
     
-        public boolean checkLogin(Usuario filtro){
+    public boolean checkLogin(Usuario filtro){
         
         
         boolean check = false;
