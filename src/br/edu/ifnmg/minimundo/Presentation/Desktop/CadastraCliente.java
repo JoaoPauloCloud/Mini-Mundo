@@ -30,7 +30,7 @@ public class CadastraCliente extends javax.swing.JFrame {
     public CadastraCliente() {
         initComponents();
         repo = new ClienteRepositorio();
-        filtro = new Cliente();
+        setCliente(filtro);
     }
 
     /**
@@ -330,7 +330,17 @@ public class CadastraCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        filtro = new Cliente();
+        try {
+            // Pega os dados dos componentes e passa para a entidade Aluno
+            this.cliente = getCliente();
+        } catch(ErroValidacaoException ex){
+            // Algum erro de validação ocorreu ao chamar os setters
+            JOptionPane.showMessageDialog(null, "Erro de validação: " + ex.getMessage());
+            return;
+        }
+        
+        
+        /*filtro = new Cliente();
         int i = 0;
 
         if (txtnome.getText().length() > 0) {
@@ -421,7 +431,7 @@ public class CadastraCliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Informações invalidas");
             }
 
-        }
+        }*/
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -512,4 +522,20 @@ public class CadastraCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtrua;
     private javax.swing.JTextField txttelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void setCliente(Cliente filtro) {
+        this.filtro = filtro;
+        txtnome.setText(filtro.getNome());
+        txtcpf.setText(filtro.getCpf());
+        txtemail.setText(filtro.getEmail());
+        cbxEstado.setSelectedItem(filtro.getEstado().name());      
+        txtbairro.setText(filtro.getBairro());
+        txtcep.setText(filtro.getCep());
+        txtcidade.setText(filtro.getCidade());
+        txtcomplemento.setText(filtro.getComplemento());
+        txtnumero.setText(Integer.parseInt(filtro.getNumero().trim()));
+        atualizarTelefones();
+        
+        
+    }
 }

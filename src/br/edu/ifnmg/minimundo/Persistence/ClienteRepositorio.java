@@ -7,10 +7,13 @@ package br.edu.ifnmg.minimundo.Persistence;
 
 
 import br.edu.ifnmg.minimundo.DomainModel.Cliente;
+import br.edu.ifnmg.minimundo.DomainModel.Estado;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -110,6 +113,65 @@ public class ClienteRepositorio extends BancoDados {
         
     }
     
+    public List<Cliente> Buscar(Cliente filtro){
+        try {
+            
+            String where = "";
+            
+            if(filtro != null){
+                if(filtro.getNome() != null && !filtro.getNome().isEmpty())
+                    where += "nome like '%"+filtro.getNome() + "%'";
+
+                if(filtro.getCpf() != null && !filtro.getCpf().isEmpty() && 
+                        !"000.000.000-00".equals(filtro.getCpf())){
+                    if(where.length() > 0)
+                        where += " and ";
+                    where += "cpf = '"+filtro.getCpf().replace(".", "").replace("-", "") + "'";
+                }
+            
+                if((filtro.getEstado().name() != "Todos") && (filtro.getEstado() != null) ){
+                    if(where.length() > 0)
+                        where += " and ";
+                    where += "estado = '"+filtro.getEstado().name() +"'";
+                }
+            }
+            
+            String consulta = "select * from clientes";
+            
+            if(where.length() >0 )
+                consulta += " where " + where;
+            
+             PreparedStatement sql = this.getConexao()
+                     .prepareStatement(consulta);
+             
+             ResultSet resultado = sql.executeQuery();
+             
+             List<Cliente> clientes = new ArrayList<>();
+             
+             while(resultado.next()) {
+             
+                Cliente cliente = new Cliente();
+                
+                try {
+                    cliente.setId( resultado.getInt("id"));
+                    cliente.setNome( resultado.getString("nome"));
+                    cliente.setCpf( resultado.getString("cpf"));
+                    cliente.setEstado( Estado.valueOf(resultado.getString("Estado")));
+                    //abrirTelefones(cliente);
+                } catch(Exception ex){
+                    cliente = null;
+                }
+                
+                clientes.add(cliente);
+             }
+             return clientes;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return null;
+    }
   
     
 }

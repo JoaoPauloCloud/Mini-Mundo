@@ -10,6 +10,7 @@ package br.edu.ifnmg.minimundo.DomainModel;
  */
 public enum Estado {
  
+Todos,
 AC,     //Acre 
 AL,     //Alagoas
 AP,     //Amapá
