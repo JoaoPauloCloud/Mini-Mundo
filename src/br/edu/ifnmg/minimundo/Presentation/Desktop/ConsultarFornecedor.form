@@ -42,7 +42,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="txtCPF" min="-2" pref="211" max="-2" attributes="0"/>
+                          <Component id="txtrs" min="-2" pref="211" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -53,7 +53,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNome" alignment="0" min="-2" pref="348" max="-2" attributes="0"/>
+                              <Component id="txtcnpj" alignment="0" min="-2" pref="348" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -80,7 +80,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                                  <Component id="txtNome" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtcnpj" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -97,7 +97,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtrs" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnNovo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -160,17 +160,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nome"/>
+            <Property name="text" type="java.lang.String" value="CNPJ"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNome">
+        <Component class="javax.swing.JTextField" name="txtcnpj">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CPF"/>
+            <Property name="text" type="java.lang.String" value="Raz&#xe3;o Social"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtCPF">
+        <Component class="javax.swing.JTextField" name="txtrs">
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
@@ -200,8 +200,8 @@
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="11" rowCount="0">
                     <Column editable="false" title="ID" type="java.lang.Integer"/>
-                    <Column editable="false" title="Nome" type="java.lang.Object"/>
-                    <Column editable="true" title="CPF" type="java.lang.Object"/>
+                    <Column editable="false" title="CNPJ" type="java.lang.Object"/>
+                    <Column editable="true" title="Raz&#xe3;o Social" type="java.lang.Object"/>
                     <Column editable="true" title="Email" type="java.lang.Object"/>
                     <Column editable="true" title="Estado" type="java.lang.Object"/>
                     <Column editable="true" title="Cidade" type="java.lang.Object"/>

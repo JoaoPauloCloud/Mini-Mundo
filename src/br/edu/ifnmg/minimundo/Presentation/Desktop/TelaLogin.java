@@ -5,8 +5,11 @@
  */
 package br.edu.ifnmg.minimundo.Presentation.Desktop;
 
+import br.edu.ifnmg.minimundo.DomainModel.ErroValidacaoException;
 import br.edu.ifnmg.minimundo.DomainModel.Usuario;
 import br.edu.ifnmg.minimundo.Persistence.UsuarioRepositorio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,11 +17,10 @@ import javax.swing.JOptionPane;
  * @author Joao Paulo
  */
 public class TelaLogin extends javax.swing.JFrame {
-    
-    
+
     UsuarioRepositorio repo;
     Usuario filtro;
-   
+
     /**
      * Creates new form Loguin
      */
@@ -26,7 +28,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         repo = new UsuarioRepositorio();
         filtro = new Usuario();
-        
+
     }
 
     /**
@@ -126,39 +128,57 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnsairActionPerformed
 
     private void btnentrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnentrarActionPerformed
-              
-        
-        
-        
-       //verificar se o campo do Usuario não esta vazio
-        if (txtusuario.getText().length() > 0) {
+
+        try {
+            filtro.setUsuario(txtusuario.getText());
+            String password = new String(this.txtsenha.getPassword());
+            filtro.setSenha(password);
+
+        } catch (ErroValidacaoException ex) {
+            Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (repo.checkAdmin(filtro)) {
+            new CadastraUsuario().setVisible(true);
+            this.dispose();
+        } else {
+            if (repo.checkLogin(filtro)) {
+                new TelaPrincipal().setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuario não existe");
+            }
+        }
+
+        /*
+            //verificar se o campo do Usuario não esta vazio
+            if (txtusuario.getText().length() > 0) {
             filtro.setUsuario(txtusuario.getText());
             //verificar se o campo da senha não esta vazia
             if (txtsenha.getPassword().length > 0) {
-                String password = new String(this.txtsenha.getPassword());
-                filtro.setSenha(password);
-                //Verificando se usuario existe
-                if (repo.checkAdmin(filtro)) {
-                    new CadastraUsuario().setVisible(true);
-                    this.dispose();
-                }else{
-                if (repo.checkLogin(filtro)) {
-                    new TelaPrincipal().setVisible(true);
-                    this.dispose();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Dados Incorretos");
-                }
-                
-                }
-
+            String password = new String(this.txtsenha.getPassword());
+            filtro.setSenha(password);
+            //Verificando se usuario existe
+            if (repo.checkAdmin(filtro)) {
+            new CadastraUsuario().setVisible(true);
+            this.dispose();
+            }else{
+            if (repo.checkLogin(filtro)) {
+            new TelaPrincipal().setVisible(true);
+            this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Senha invalida");
+            JOptionPane.showMessageDialog(null, "Dados Incorretos");
             }
-        } else {
+
+            }
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Senha invalida");
+            }
+            } else {
             JOptionPane.showMessageDialog(null, "Usuario invalido");
-        }
-
-
+            }
+            
+         */
     }//GEN-LAST:event_btnentrarActionPerformed
 
     /**

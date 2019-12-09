@@ -5,10 +5,10 @@
  */
 package br.edu.ifnmg.minimundo.Presentation.Desktop;
 
-import br.edu.ifnmg.minimundo.DomainModel.Cliente;
+import br.edu.ifnmg.minimundo.DomainModel.Fornecedor;
 import br.edu.ifnmg.minimundo.DomainModel.ErroValidacaoException;
 import br.edu.ifnmg.minimundo.DomainModel.Estado;
-import br.edu.ifnmg.minimundo.Persistence.ClienteRepositorio;
+import br.edu.ifnmg.minimundo.Persistence.FornecedorRepositorio;
 import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.Vector;
@@ -17,17 +17,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Joao Paulo
  */
-public class ConsultarCliente extends javax.swing.JFrame {
-     ClienteRepositorio repo;
-     Cliente filtro;
+public class ConsultarFornecedor extends javax.swing.JFrame {
+     FornecedorRepositorio repo;
+     Fornecedor filtro;
     /**
-     * Creates new form ConsultarCliente1
+     * Creates new form ConsultarFornecedor1
      */
-    public ConsultarCliente() {
+    public ConsultarFornecedor() {
         initComponents();
         
-        repo = new ClienteRepositorio();
-        filtro = new Cliente(); 
+        repo = new FornecedorRepositorio();
+        filtro = new Fornecedor(); 
     }
 
     /**
@@ -43,9 +43,9 @@ public class ConsultarCliente extends javax.swing.JFrame {
         cbxEstado = new javax.swing.JComboBox<>();
         txtestado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        txtcnpj = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtCPF = new javax.swing.JTextField();
+        txtrs = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnNovo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -64,9 +64,9 @@ public class ConsultarCliente extends javax.swing.JFrame {
         txtestado.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtestado.setText("Estado");
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("CNPJ");
 
-        jLabel3.setText("CPF");
+        jLabel3.setText("Razão Social");
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +87,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "Email", "Estado", "Cidade", "Cep", "Bairro", "Rua", "Numero", "Complemento"
+                "ID", "CNPJ", "Razão Social", "Email", "Estado", "Cidade", "Cep", "Bairro", "Rua", "Numero", "Complemento"
             }
         ) {
             Class[] types = new Class [] {
@@ -131,7 +131,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtrs, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar)
                         .addGap(18, 18, 18)
@@ -141,7 +141,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtcnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -161,7 +161,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(11, 11, 11)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtcnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(20, 20, 20)
@@ -172,7 +172,7 @@ public class ConsultarCliente extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtrs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovo)
                     .addComponent(btnBuscar))
                 .addGap(18, 18, 18)
@@ -198,22 +198,22 @@ public class ConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_cbxEstadoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        filtro = new Cliente();
+        filtro = new Fornecedor();
         try {
-            if(txtNome.getText().length() > 0)
-            filtro.setNome( txtNome.getText() );
+            if(txtcnpj.getText().length() > 0)
+            filtro.setcnpj(txtcnpj.getText());
 
             filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
 
-            if(!txtCPF.getText().isEmpty() && txtCPF.getText().length() >= 11)
-            filtro.setCpf(txtCPF.getText());
+            if(txtrs.getText().length() > 0)
+            filtro.setRs(txtrs.getText());
         } catch(ErroValidacaoException ex){
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
-        List<Cliente> clientes = repo.Buscar(filtro);
-
-        preencherTabela(clientes);
+        List<Fornecedor> fornecedores = repo.Buscar(filtro);
+System.out.println();
+        preencherTabela(fornecedores);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -272,21 +272,23 @@ public class ConsultarCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsultarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsultarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsultarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsultarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultarFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ConsultarCliente().setVisible(true);
+                new ConsultarFornecedor().setVisible(true);
             }
         });
     }
@@ -301,17 +303,17 @@ public class ConsultarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabResultado;
-    private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtcnpj;
     private javax.swing.JLabel txtestado;
+    private javax.swing.JTextField txtrs;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherTabela(List<Cliente> lista) {
+    private void preencherTabela(List<Fornecedor> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         
         modelo.addColumn("ID");
-        modelo.addColumn("Nome");
-        modelo.addColumn("CPF");
+        modelo.addColumn("Razão Social");
+        modelo.addColumn("CNPJ");
         modelo.addColumn("Email");
         modelo.addColumn("Estado");
         modelo.addColumn("Cidade");
@@ -321,11 +323,11 @@ public class ConsultarCliente extends javax.swing.JFrame {
         modelo.addColumn("Numero");
         modelo.addColumn("Complemento");
         
-        for(Cliente a : lista){
+        for(Fornecedor a : lista){
             Vector linha = new Vector();
             linha.add(a.getId());
-            linha.add(a.getNome());
-            linha.add(a.getCpf());
+            linha.add(a.getRs());
+            linha.add(a.getcnpj());
             linha.add(a.getEmail());
             linha.add(a.getEstado());
             linha.add(a.getCidade());

@@ -25,7 +25,7 @@ public class Cliente {
     private int statu;
      
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
-    
+    private Pattern regex_cep = Pattern.compile("\\d{5}\\-?\\d{3}");
     
     
     
@@ -52,7 +52,7 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;        
-        this.telefones = telefones;
+        this.telefones = new ArrayList<>();
         this.email = email;
         this.statu = statu;
         //Endereço
@@ -78,7 +78,8 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
 
    
     //buscar,alterar o nome do bairro
-    public void setBairro(String bairro) {
+    public void setBairro(String bairro) throws ErroValidacaoException {
+        if(bairro.length() < 3)throw new ErroValidacaoException(" * Campo Bairro Obrigatorio");
         this.bairro = bairro;
     }
          
@@ -91,7 +92,8 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade)throws ErroValidacaoException {
+        if(cidade.length() < 3)throw new ErroValidacaoException(" * Campo Cidade Obrigatorio");
         this.cidade = cidade;
     }
     
@@ -110,7 +112,7 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
     }
 
    
-    public void setEstado(Estado estado) {
+    public void setEstado(Estado estado){        
         this.estado = estado;
     }
     
@@ -120,7 +122,7 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
     }
 
     public void setRua(String rua) throws ErroValidacaoException {
-        if(nome.length() < 2)
+        if(rua.length() < 2)
             throw new ErroValidacaoException(" * Campo Obrigatorio");
         this.rua = rua;
     }
@@ -129,8 +131,10 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumero(int numero) throws ErroValidacaoException {
+        if((numero < 1) && (numero > 999999))throw new ErroValidacaoException(" * Campo Numero é Obrigatorio");
+            this.numero = numero;
+        
     }
 
     public String getEmail() {
@@ -150,7 +154,7 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
 
     public void setNome(String nome) throws ErroValidacaoException {
         if(nome.length() < 3)
-            throw new ErroValidacaoException("O atributo nome deve ter no mínimo 3 caracteres!");
+            throw new ErroValidacaoException("O campo nome deve ter no mínimo 3 caracteres!");
         this.nome = nome;
     }
 //Buscando, alterando e verificando se cpf é valido
@@ -189,11 +193,17 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
     }
 
     public String getCep() {
-        return cep;
+        return  cep.substring(0, 5)+"-"+
+                cep.substring(5, 8);
+        
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setCep(String cep)throws ErroValidacaoException {
+        Matcher m = regex_cep.matcher(cep);
+        if(m.matches())
+            this.cep = cep.replace("-", "");
+        else
+            throw new ErroValidacaoException("Cep Inválido!");
     }
 
     public int getStatu() {

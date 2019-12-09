@@ -30,7 +30,7 @@ public class CadastraCliente extends javax.swing.JFrame {
     public CadastraCliente() {
         initComponents();
         repo = new ClienteRepositorio();
-        setCliente(filtro);
+        filtro = new Cliente();
     }
 
     /**
@@ -41,6 +41,7 @@ public class CadastraCliente extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jButton2 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
@@ -67,12 +68,13 @@ public class CadastraCliente extends javax.swing.JFrame {
         txtnumero = new javax.swing.JTextField();
         numero = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        CaixaTelefones = new javax.swing.JPanel();
         txttelefone = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTelefones = new javax.swing.JList<>();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,13 +136,72 @@ public class CadastraCliente extends javax.swing.JFrame {
             }
         });
 
+        CaixaTelefones.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefones"));
+
+        txttelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txttelefoneActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Adicionar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Remover");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        tblTelefones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTelefonesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTelefones);
+
+        javax.swing.GroupLayout CaixaTelefonesLayout = new javax.swing.GroupLayout(CaixaTelefones);
+        CaixaTelefones.setLayout(CaixaTelefonesLayout);
+        CaixaTelefonesLayout.setHorizontalGroup(
+            CaixaTelefonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CaixaTelefonesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CaixaTelefonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CaixaTelefonesLayout.createSequentialGroup()
+                        .addComponent(txttelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5)))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+        CaixaTelefonesLayout.setVerticalGroup(
+            CaixaTelefonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CaixaTelefonesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CaixaTelefonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txttelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtnome, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                         .addComponent(jLabel2)
@@ -160,10 +221,10 @@ public class CadastraCliente extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addComponent(txtestado)
                         .addComponent(numero)
-                        .addComponent(txtnumero)
-                        .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1207, Short.MAX_VALUE))
+                        .addComponent(txtnumero))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CaixaTelefones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(968, 968, 968))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,9 +243,9 @@ public class CadastraCliente extends javax.swing.JFrame {
                 .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(txtestado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,61 +269,23 @@ public class CadastraCliente extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcomplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(CaixaTelefones, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Cliente", jPanel1);
 
-        txttelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txttelefoneActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Adicionar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Remover");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jScrollPane1.setViewportView(tblTelefones);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txttelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)))
-                .addContainerGap(1036, Short.MAX_VALUE))
+            .addGap(0, 1451, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(378, Short.MAX_VALUE))
+            .addGap(0, 980, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Telefones", jPanel2);
@@ -277,12 +300,14 @@ public class CadastraCliente extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -292,33 +317,11 @@ public class CadastraCliente extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        this.filtro.removeTelefone(txttelefone.getText());
-        txttelefone.setText("");
-        atualizarTelefones();
-
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        filtro.addTelefone(txttelefone.getText());
-        this.filtro.addTelefone(txttelefone.getText());
-        txttelefone.setText("");
-        atualizarTelefones();
-
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void txttelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txttelefoneActionPerformed
 
     private void cbxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoActionPerformed
         // TODO add your handling code here:
@@ -330,108 +333,129 @@ public class CadastraCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
+        
+        filtro = new Cliente();
+        System.out.print(filtro.getTelefones());
+        
         try {
-            // Pega os dados dos componentes e passa para a entidade Aluno
-            this.cliente = getCliente();
-        } catch(ErroValidacaoException ex){
-            // Algum erro de validação ocorreu ao chamar os setters
-            JOptionPane.showMessageDialog(null, "Erro de validação: " + ex.getMessage());
+            filtro.setNome(txtnome.getText());
+            filtro.setCpf(txtcpf.getText());
+            filtro.setEmail(txtemail.getText());
+            //Endereço
+            filtro.setCidade(txtcidade.getText());
+            filtro.setCep(txtcep.getText());
+            filtro.setBairro(txtbairro.getText());
+            filtro.setRua(txtrua.getText());
+            filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
+            filtro.setComplemento(txtcomplemento.getText());
+            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
+            
+        } catch (ErroValidacaoException ex) {
+            JOptionPane.showMessageDialog(null,"" + ex.getMessage());
             return;
         }
         
+        if (repo.Salvar(filtro)) {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
+            } else {
+            JOptionPane.showMessageDialog(null, "Informações invalidas");
+            }
+            
+            
+            /*
+            int i = 0;
         
-        /*filtro = new Cliente();
-        int i = 0;
-
-        if (txtnome.getText().length() > 0) {
+            if (txtnome.getText().length() > 0) {
             try {
-                filtro.setNome(txtnome.getText());
+            filtro.setNome(txtnome.getText());
             } catch (ErroValidacaoException ex) {
-                Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (!txtcpf.getText().isEmpty() && txtcpf.getText().length() >= 11) {
-                try {
-                    filtro.setCpf(txtcpf.getText());
-                } catch (ErroValidacaoException ex) {
-                    Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (txtemail.getText().length() > 0) {
-                    filtro.setEmail(txtemail.getText());
-                    //Endereço
-                    if (txtcidade.getText().length() > 0) {
-                        filtro.setCidade(txtcidade.getText());
-
-                        if (txtcep.getText().length() > 0) {
-                            filtro.setCep(txtcep.getText());
-
-                            if (txtbairro.getText().length() > 0) {
-                                filtro.setBairro(txtbairro.getText());
-
-                                if (txtrua.getText().length() > 0) {
-
-                                    try {
-                                        filtro.setRua(txtrua.getText());
-                                    } catch (ErroValidacaoException ex) {
-                                        Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                    if (txtnumero.getText().length() > 0) {
-                                        filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
-                                        if (txtcomplemento.getText().length() > 0) {
-                                            filtro.setComplemento(txtcomplemento.getText());
-                                            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "Complemento não pode ficar em branco");
-                                            i = 1;
-                                        }
-
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Numero não pode ficar em branco");
-                                        i = 1;
-                                    }
-
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Rua não pode ficar em branco");
-                                    i = 1;
-                                }
-
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Bairro não pode ficar em branco");
-                                i = 1;
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Cep não pode ficar em branco");
-                            i = 1;
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Cidade não pode ficar em branco");
-                        i = 1;
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Email não pode ficar em branco");
-                    i = 1;
-
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "CPF não pode ficar em branco");
-                i = 1;
-
+            try {
+            filtro.setCpf(txtcpf.getText());
+            } catch (ErroValidacaoException ex) {
+            Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
+            if (txtemail.getText().length() > 0) {
+            filtro.setEmail(txtemail.getText());
+            //Endereço
+            if (txtcidade.getText().length() > 0) {
+            filtro.setCidade(txtcidade.getText());
+            
+            if (txtcep.getText().length() > 0) {
+            filtro.setCep(txtcep.getText());
+            
+            if (txtbairro.getText().length() > 0) {
+            filtro.setBairro(txtbairro.getText());
+            
+            if (txtrua.getText().length() > 0) {
+            
+            try {
+            filtro.setRua(txtrua.getText());
+            } catch (ErroValidacaoException ex) {
+            Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (txtnumero.getText().length() > 0) {
+            filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
+            if (txtcomplemento.getText().length() > 0) {
+            filtro.setComplemento(txtcomplemento.getText());
+            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
+            } else {
+            JOptionPane.showMessageDialog(null, "Complemento não pode ficar em branco");
+            i = 1;
+            }
+
+            } else {
+            JOptionPane.showMessageDialog(null, "Numero não pode ficar em branco");
+            i = 1;
+            }
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Rua não pode ficar em branco");
+            i = 1;
+            }
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Bairro não pode ficar em branco");
+            i = 1;
+            }
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Cep não pode ficar em branco");
+            i = 1;
+            }
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Cidade não pode ficar em branco");
+            i = 1;
+            }
+            
+            } else {
+            JOptionPane.showMessageDialog(null, "Email não pode ficar em branco");
+            i = 1;
+            
+            }
+            } else {
+            JOptionPane.showMessageDialog(null, "CPF não pode ficar em branco");
+            i = 1;
+            
+            }
+            } else {
             JOptionPane.showMessageDialog(null, "Nome não pode ficar em branco");
             i = 1;
-
-        }
-        if (i != 1) {
-            if (repo.Salvar(filtro)) {
-                JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
-            } else {
-                JOptionPane.showMessageDialog(null, "Informações invalidas");
+            
             }
-
-        }*/
+            if (i != 1) {
+            if (repo.Salvar(filtro)) {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
+            } else {
+            JOptionPane.showMessageDialog(null, "Informações invalidas");
+            }
+            
+            }*/
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -440,6 +464,30 @@ public class CadastraCliente extends javax.swing.JFrame {
         new TelaPrincipal().setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txttelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txttelefoneActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        filtro.removeTelefone(txttelefone.getText());
+        txttelefone.setText("");
+        atualizarTelefones();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        //filtro.setTelefones(txttelefone.getText());
+        filtro.addTelefone(txttelefone.getText());
+        txttelefone.setText("");
+        atualizarTelefones();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
+        // TODO add your handling code here:
+        txttelefone.setText( tblTelefones.getSelectedValue() );
+    }//GEN-LAST:event_tblTelefonesMouseClicked
 
     private void atualizarTelefones(){
         String[] tel = new String[filtro.getTelefones().size()];
@@ -489,6 +537,7 @@ public class CadastraCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CaixaTelefones;
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -523,19 +572,5 @@ public class CadastraCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txttelefone;
     // End of variables declaration//GEN-END:variables
 
-    private void setCliente(Cliente filtro) {
-        this.filtro = filtro;
-        txtnome.setText(filtro.getNome());
-        txtcpf.setText(filtro.getCpf());
-        txtemail.setText(filtro.getEmail());
-        cbxEstado.setSelectedItem(filtro.getEstado().name());      
-        txtbairro.setText(filtro.getBairro());
-        txtcep.setText(filtro.getCep());
-        txtcidade.setText(filtro.getCidade());
-        txtcomplemento.setText(filtro.getComplemento());
-        txtnumero.setText(Integer.parseInt(filtro.getNumero().trim()));
-        atualizarTelefones();
-        
-        
-    }
+    
 }

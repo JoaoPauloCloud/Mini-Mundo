@@ -23,6 +23,7 @@ public class Usuario  {
     
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     
+    private Pattern regex_telefone = Pattern.compile("\\(?\\d{2}\\)?\\d{9}");
     
     
     
@@ -30,7 +31,7 @@ public Usuario() {
         this.id = 0;
         this.nome = "";
         this.cpf = "00000000000";
-        this.telefone = "";
+        this.telefone = "00000000000";
         this.usuario = "";
         this.senha = "";         
 
@@ -62,7 +63,7 @@ public Usuario(int id, String nome, String cpf, String telefone, String usuario,
 
     public void setNome(String nome) throws ErroValidacaoException {
         if(nome.length() < 3)
-            throw new ErroValidacaoException("O atributo nome deve ter no mínimo 3 caracteres!");
+            throw new ErroValidacaoException("O campo nome deve ter no mínimo 3 caracteres!");
         this.nome = nome;
     }
 
@@ -86,15 +87,20 @@ public Usuario(int id, String nome, String cpf, String telefone, String usuario,
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTelefone(String telefone)throws ErroValidacaoException {
+        Matcher m = regex_telefone.matcher(telefone);
+        if(m.matches())
+            this.telefone = telefone.replace("(", "").replace(")", "");
+        else
+            throw new ErroValidacaoException("telefone Inválido!");
     }
 
     public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(String usuario)throws ErroValidacaoException {
+        if(usuario.length() < 1)throw new ErroValidacaoException("* campo usuario não pode ficar vazil");
         this.usuario = usuario;
     }
 
@@ -102,18 +108,9 @@ public Usuario(int id, String nome, String cpf, String telefone, String usuario,
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(String senha) throws ErroValidacaoException{
+        if(senha.length() < 1)throw new ErroValidacaoException("* campo senha não pode ficar vazil ");
         this.senha = senha;
-    }
-
-    
-
-    public Pattern getRegex_cpf() {
-        return regex_cpf;
-    }
-
-    public void setRegex_cpf(Pattern regex_cpf) {
-        this.regex_cpf = regex_cpf;
     }
     
     

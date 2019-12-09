@@ -32,8 +32,11 @@ public class Fornecedor {
     
     private Pattern regex_cnpj = 
             Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\.?\\d{4}\\-?\\d{2}");
+    
+    private Pattern regex_cep = Pattern.compile("\\d{5}\\-?\\d{3}");
 
     public Fornecedor() {
+        this.id = 0;
         this.cnpj = "00000000000000";
         this.rs = "";
         this.email = "";
@@ -44,13 +47,14 @@ public class Fornecedor {
         this.estado = Estado.AC;
         this.numero = 0;
         this.rua = "";
-        this.cep = "";
+        this.cep = "00000000";
         
         
         
     }
     
-    public Fornecedor(String cnpj, String rs, String endereço, String email,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
+    public Fornecedor(int id,String cnpj, String rs, String endereço, String email,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
+        this.id = id;
         this.cnpj = cnpj;
         this.rs = rs;
         this.email = email;
@@ -91,28 +95,23 @@ public class Fornecedor {
             throw new ErroValidacaoException("CNPJ Inválido!");
     }
 
-   /* public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
-*/
-    public String getRs() {
+   
+    public String getRs(){        
         return rs;
     }
 
-    public void setRs(String rs) {
+    public void setRs(String rs)throws  ErroValidacaoException {
+        if(rs.length() < 3)throw new ErroValidacaoException("* O campo Razão Social deve ter no mínimo 3 caracteres!");
         this.rs = rs;
     }
 
+    public void setBairro(String bairro) throws ErroValidacaoException {
+        if(bairro.length() < 3)throw new ErroValidacaoException(" * Campo Bairro Obrigatorio");
+        this.bairro = bairro;
+    }
+         
     public String getBairro() {
         return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
     }
 
     public Estado getEstado() {
@@ -123,11 +122,13 @@ public class Fornecedor {
         this.estado = estado;
     }
 
-    public String getRua() {
+  public String getRua() {
         return rua;
     }
 
-    public void setRua(String rua) {
+    public void setRua(String rua) throws ErroValidacaoException {
+        if(rua.length() < 2)
+            throw new ErroValidacaoException(" * Campo Obrigatorio");
         this.rua = rua;
     }
 
@@ -135,16 +136,20 @@ public class Fornecedor {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade)throws ErroValidacaoException {
+        if(cidade.length() < 3)throw new ErroValidacaoException(" * Campo Cidade Obrigatorio");
         this.cidade = cidade;
     }
+    
 
     public int getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumero(int numero) throws ErroValidacaoException {
+        if((numero < 1) && (numero > 999999))throw new ErroValidacaoException(" * Campo Numero é Obrigatorio");
+            this.numero = numero;
+        
     }
 
     public String getComplemento() {
@@ -156,11 +161,17 @@ public class Fornecedor {
     }
 
     public String getCep() {
-        return cep;
+        return  cep.substring(0, 5)+"-"+
+                cep.substring(5, 8);
+        
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public void setCep(String cep)throws ErroValidacaoException {
+        Matcher m = regex_cep.matcher(cep);
+        if(m.matches())
+            this.cep = cep.replace("-", "");
+        else
+            throw new ErroValidacaoException("Cep Inválido!");
     }
 
     public String getEmail() {
@@ -170,27 +181,6 @@ public class Fornecedor {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Pattern getRegex_cnpj() {
-        return regex_cnpj;
-    }
-
-    public void setRegex_cnpj(Pattern regex_cnpj) {
-        this.regex_cnpj = regex_cnpj;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

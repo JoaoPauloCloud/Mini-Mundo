@@ -19,8 +19,10 @@ import javax.swing.JOptionPane;
  * @author Joao Paulo
  */
 public class CadastraFornecedor extends javax.swing.JFrame {
-     FornecedorRepositorio repo;
-     Fornecedor filtro;
+
+    FornecedorRepositorio repo;
+    Fornecedor filtro;
+
     /**
      * Creates new form CadastraFornecedor
      */
@@ -243,98 +245,119 @@ public class CadastraFornecedor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         filtro = new Fornecedor();
-        int i = 0;
-        if (txtcnpj.getText().length() > 0) {
-            try {
-                filtro.setcnpj(txtcnpj.getText());
-            } catch (ErroValidacaoException ex) {
-                Logger.getLogger(CadastraFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (txtrs.getText().length() > 0) {
-                filtro.setRs(txtrs.getText());
 
-                if (txtemail.getText().length() > 0) {
-                    filtro.setEmail(txtemail.getText());
-                    //Endereço
-                    if (txtcidade.getText().length() > 0) {
-                        filtro.setCidade(txtcidade.getText());
+        try {
+            filtro.setcnpj(txtcnpj.getText());
+            filtro.setRs(txtrs.getText());
+            filtro.setEmail(txtemail.getText());
+            //Endereço
+            filtro.setCidade(txtcidade.getText());
+            filtro.setCep(txtcep.getText());
+            filtro.setBairro(txtbairro.getText());
+            filtro.setRua(txtrua.getText());
+            filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
+            filtro.setComplemento(txtcomplemento.getText());
+            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
 
-                        if (txtcep.getText().length() > 0) {
-                            filtro.setCep(txtcep.getText());
-                            
-                            if (txtbairro.getText().length() > 0) {
-                                filtro.setBairro(txtbairro.getText());
-                                if (txtrua.getText().length() > 0) {
-                                    filtro.setRua(txtrua.getText());
-                                    
-                                    if (txtnumero.getText().length() > 0) {
-                                        filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
-                                        if (txtcomplemento.getText().length() > 0) {
-                                            filtro.setComplemento(txtcomplemento.getText());
-                                            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "Complemento não pode ficar em branco");
-                                            i = 1;
-                                        }
+        } catch (ErroValidacaoException ex) {
+            JOptionPane.showMessageDialog(null, "" + ex.getMessage());
+            return;
+        }
 
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, "Numero não pode ficar em branco");
-                                        i = 1;
-                                    }
-
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "Rua não pode ficar em branco");
-                                    i = 1;
-                                }
-
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Bairro não pode ficar em branco");
-                                i = 1;
-                            }
-
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Cep não pode ficar em branco");
-                            i = 1;
-                        }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Cidade não pode ficar em branco");
-                        i = 1;
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "Email não pode ficar em branco");
-                    i = 1;
-
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Razão Social não pode ficar em branco");
-                i = 1;
-
-            }
-
+        if (repo.Salvar(filtro)) {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
         } else {
-            JOptionPane.showMessageDialog(null, "CNPJ não pode ficar em branco");
-            i = 1;
+            JOptionPane.showMessageDialog(null, "Informações invalidas");
         }
 
-        if (i != 1) {
-            if (repo.Salvar(filtro)) {
-                JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
-            } else {
-                JOptionPane.showMessageDialog(null, "Informações invalidas");
-            }
+        /*
+             int i = 0;
+             
+             if (txtcnpj.getText().length() > 0) {
+             try {
+             filtro.setcnpj(txtcnpj.getText());
+             } catch (ErroValidacaoException ex) {
+             Logger.getLogger(CadastraFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+             }
+             if (txtrs.getText().length() > 0) {
+             filtro.setRs(txtrs.getText());
+             
+             if (txtemail.getText().length() > 0) {
+             filtro.setEmail(txtemail.getText());
+             //Endereço
+             if (txtcidade.getText().length() > 0) {
+             filtro.setCidade(txtcidade.getText());
+             
+             if (txtcep.getText().length() > 0) {
+             filtro.setCep(txtcep.getText());
+             
+             if (txtbairro.getText().length() > 0) {
+             filtro.setBairro(txtbairro.getText());
+             if (txtrua.getText().length() > 0) {
+             filtro.setRua(txtrua.getText());
+             
+             if (txtnumero.getText().length() > 0) {
+             filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
+             if (txtcomplemento.getText().length() > 0) {
+             filtro.setComplemento(txtcomplemento.getText());
+             filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
+             } else {
+             JOptionPane.showMessageDialog(null, "Complemento não pode ficar em branco");
+             i = 1;
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Numero não pode ficar em branco");
+             i = 1;
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Rua não pode ficar em branco");
+             i = 1;
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Bairro não pode ficar em branco");
+             i = 1;
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Cep não pode ficar em branco");
+             i = 1;
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Cidade não pode ficar em branco");
+             i = 1;
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Email não pode ficar em branco");
+             i = 1;
+             
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "Razão Social não pode ficar em branco");
+             i = 1;
+             
+             }
+             
+             } else {
+             JOptionPane.showMessageDialog(null, "CNPJ não pode ficar em branco");
+             i = 1;
+             }
+             
+             if (i != 1) {
+             if (repo.Salvar(filtro)) {
+             JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
+             } else {
+             JOptionPane.showMessageDialog(null, "Informações invalidas");
+             }
+             
+             }
+         */
 
-        }
-
-
-        
-        
-        
-        
-        
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

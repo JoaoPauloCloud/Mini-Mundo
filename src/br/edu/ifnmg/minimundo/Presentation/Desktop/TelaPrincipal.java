@@ -85,6 +85,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu6.add(jMenuItem3);
 
         jMenuItem4.setText("Buscar Fornecedor");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem4);
 
         jMenuBar2.add(jMenu6);
@@ -154,6 +159,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         new CadastraFornecedor().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        new ConsultarFornecedor().setVisible(true);
+        this.dispose();
+        
+        
+        
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
