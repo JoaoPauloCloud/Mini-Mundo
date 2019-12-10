@@ -15,8 +15,9 @@ import java.util.regex.Pattern;
  * @author Joao Paulo
  */
 public class Fornecedor {
-    
+
     private int id;
+    private String nome;
     private String cnpj;
     //rs = Razão Social
     private String rs;
@@ -29,14 +30,21 @@ public class Fornecedor {
     private int numero;
     private String complemento;
     private String cep;
+
+    private Pattern regex_cnpj
+            = Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\.?\\d{4}\\-?\\d{2}");
     
-    private Pattern regex_cnpj = 
-            Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\.?\\d{4}\\-?\\d{2}");
+    private Pattern regex_email = Pattern.compile("^[a-za-z0-9_+&*-]+(?:\\."+ 
+                            "[a-za-z0-9_+&*-]+)*@" + 
+                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
+                            "A-Z]{2,7}$");
     
+
     private Pattern regex_cep = Pattern.compile("\\d{5}\\-?\\d{3}");
 
     public Fornecedor() {
         this.id = 0;
+        this.nome = "";
         this.cnpj = "00000000000000";
         this.rs = "";
         this.email = "";
@@ -48,13 +56,12 @@ public class Fornecedor {
         this.numero = 0;
         this.rua = "";
         this.cep = "00000000";
-        
-        
-        
+
     }
-    
-    public Fornecedor(int id,String cnpj, String rs, String endereço, String email,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
+
+    public Fornecedor(int id, String nome, String cnpj, String rs, String endereço, String email, String bairro, String estado, String rua, String cidade, int numero, String complemento, String cep) {
         this.id = id;
+        this.nome = nome;
         this.cnpj = cnpj;
         this.rs = rs;
         this.email = email;
@@ -66,7 +73,7 @@ public class Fornecedor {
         this.numero = numero;
         this.rua = rua;
         this.cep = cep;
-        
+
     }
 
     public int getId() {
@@ -76,40 +83,53 @@ public class Fornecedor {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    
-    public String getcnpj() {
-        return (cnpj.substring(0, 2) + "." + 
-                cnpj.substring(2, 5) + "." +
-                cnpj.substring(5, 8) + "." + 
-                cnpj.substring(8, 12) + "-" +
-                cnpj.substring(12, 14));
-    }
-    
-    public void setcnpj(String cnpj) throws ErroValidacaoException {
-        Matcher m = regex_cnpj.matcher(cnpj);
-        if(m.matches())
-            this.cnpj = cnpj.replace(".", "").replace("-", "");
-        else
-            throw new ErroValidacaoException("CNPJ Inválido!");
+
+    public String getNome() {
+        return nome;
     }
 
-   
-    public String getRs(){        
+    public void setNome(String nome) throws ErroValidacaoException {
+        if (nome.length() < 3) {
+            throw new ErroValidacaoException("O campo nome deve ter no mínimo 3 caracteres!");
+        }
+        this.nome = nome;
+    }
+
+    public String getcnpj() {
+        return (cnpj.substring(0, 2) + "."
+                + cnpj.substring(2, 5) + "."
+                + cnpj.substring(5, 8) + "."
+                + cnpj.substring(8, 12) + "-"
+                + cnpj.substring(12, 14));
+    }
+
+    public void setcnpj(String cnpj) throws ErroValidacaoException {
+        Matcher m = regex_cnpj.matcher(cnpj);
+        if (m.matches()) {
+            this.cnpj = cnpj.replace(".", "").replace("-", "");
+        } else {
+            throw new ErroValidacaoException("CNPJ Inválido!");
+        }
+    }
+
+    public String getRs() {
         return rs;
     }
 
-    public void setRs(String rs)throws  ErroValidacaoException {
-        if(rs.length() < 3)throw new ErroValidacaoException("* O campo Razão Social deve ter no mínimo 3 caracteres!");
+    public void setRs(String rs) throws ErroValidacaoException {
+        if (rs.length() < 3) {
+            throw new ErroValidacaoException("* O campo Razão Social deve ter no mínimo 3 caracteres!");
+        }
         this.rs = rs;
     }
 
     public void setBairro(String bairro) throws ErroValidacaoException {
-        if(bairro.length() < 3)throw new ErroValidacaoException(" * Campo Bairro Obrigatorio");
+        if (bairro.length() < 3) {
+            throw new ErroValidacaoException(" * Campo Bairro Obrigatorio");
+        }
         this.bairro = bairro;
     }
-         
+
     public String getBairro() {
         return bairro;
     }
@@ -122,13 +142,14 @@ public class Fornecedor {
         this.estado = estado;
     }
 
-  public String getRua() {
+    public String getRua() {
         return rua;
     }
 
     public void setRua(String rua) throws ErroValidacaoException {
-        if(rua.length() < 2)
+        if (rua.length() < 2) {
             throw new ErroValidacaoException(" * Campo Obrigatorio");
+        }
         this.rua = rua;
     }
 
@@ -136,20 +157,23 @@ public class Fornecedor {
         return cidade;
     }
 
-    public void setCidade(String cidade)throws ErroValidacaoException {
-        if(cidade.length() < 3)throw new ErroValidacaoException(" * Campo Cidade Obrigatorio");
+    public void setCidade(String cidade) throws ErroValidacaoException {
+        if (cidade.length() < 3) {
+            throw new ErroValidacaoException(" * Campo Cidade Obrigatorio");
+        }
         this.cidade = cidade;
     }
-    
 
     public int getNumero() {
         return numero;
     }
 
     public void setNumero(int numero) throws ErroValidacaoException {
-        if((numero < 1) && (numero > 999999))throw new ErroValidacaoException(" * Campo Numero é Obrigatorio");
-            this.numero = numero;
-        
+        if ((numero < 1) && (numero > 999999)) {
+            throw new ErroValidacaoException(" * Campo Numero é Obrigatorio");
+        }
+        this.numero = numero;
+
     }
 
     public String getComplemento() {
@@ -161,28 +185,35 @@ public class Fornecedor {
     }
 
     public String getCep() {
-        return  cep.substring(0, 5)+"-"+
-                cep.substring(5, 8);
-        
+        return cep.substring(0, 5) + "-"
+                + cep.substring(5, 8);
+
     }
 
-    public void setCep(String cep)throws ErroValidacaoException {
+    public void setCep(String cep) throws ErroValidacaoException {
         Matcher m = regex_cep.matcher(cep);
-        if(m.matches())
+        if (m.matches()) {
             this.cep = cep.replace("-", "");
-        else
+        } else {
             throw new ErroValidacaoException("Cep Inválido!");
+        }
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws ErroValidacaoException {
+        Matcher m = regex_email.matcher(email);
+        if (m.matches()) {
+            this.email = email;
+        } else {
+            throw new ErroValidacaoException("Email Inválido!");
+        }
     }
     
-    
-    
-    
+    public String toString(){
+        return this.nome;
+    }
+
 }

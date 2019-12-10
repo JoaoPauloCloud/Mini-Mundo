@@ -335,7 +335,7 @@ public class CadastraCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        filtro = new Cliente();
+        //filtro = new Cliente();
         System.out.print(filtro.getTelefones());
         
         try {
