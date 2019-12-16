@@ -87,14 +87,14 @@ public class ConsultarFornecedor extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CNPJ", "Razão Social", "Email", "Estado", "Cidade", "Cep", "Bairro", "Rua", "Numero", "Complemento"
+                "ID", "Nome", "CNPJ", "Razão Social", "Email", "Estado", "Cidade", "Cep", "Bairro", "Rua", "Numero", "Complemento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true, true, true, true, true
+                false, false, false, true, true, true, true, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -313,8 +313,8 @@ public class ConsultarFornecedor extends javax.swing.JFrame {
         
         modelo.addColumn("ID");
         modelo.addColumn("Nome");
-        modelo.addColumn("Razão Social");
         modelo.addColumn("CNPJ");
+        modelo.addColumn("Razão Social");        
         modelo.addColumn("Email");
         modelo.addColumn("Estado");
         modelo.addColumn("Cidade");
@@ -328,8 +328,8 @@ public class ConsultarFornecedor extends javax.swing.JFrame {
             Vector linha = new Vector();
             linha.add(a.getId());
             linha.add(a.getNome());
-            linha.add(a.getRs());
             linha.add(a.getcnpj());
+            linha.add(a.getRs());            
             linha.add(a.getEmail());
             linha.add(a.getEstado());
             linha.add(a.getCidade());

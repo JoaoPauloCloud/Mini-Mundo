@@ -35,15 +35,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu6 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TelaPrincipal");
@@ -94,6 +94,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu6);
 
+        jMenu1.setText("Produtos");
+
+        jMenuItem9.setText("Cadastra Produto");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
+
+        jMenuItem10.setText("Consultar Produtos");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem10);
+
+        jMenuBar2.add(jMenu1);
+
         jMenu7.setText("Compras");
 
         jMenuItem5.setText("Compra Produtos");
@@ -113,16 +133,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu8.add(jMenuItem8);
 
         jMenuBar2.add(jMenu8);
-
-        jMenu1.setText("Produtos");
-
-        jMenuItem9.setText("Cadastra Produto");
-        jMenu1.add(jMenuItem9);
-
-        jMenuItem10.setText("Consultar Produtos");
-        jMenu1.add(jMenuItem10);
-
-        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -168,6 +178,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        new CadastraProduto().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        new ConsultarProduto().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments

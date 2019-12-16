@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,8 +6,6 @@
  */
 package br.edu.ifnmg.minimundo.DomainModel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +29,7 @@ public class Fornecedor {
     private int numero;
     private String complemento;
     private String cep;
+    private Statu statu;
 
     private Pattern regex_cnpj
             = Pattern.compile("\\d{2}\\.?\\d{3}\\.?\\d{3}\\.?\\d{4}\\-?\\d{2}");
@@ -48,6 +48,7 @@ public class Fornecedor {
         this.cnpj = "00000000000000";
         this.rs = "";
         this.email = "";
+        this.statu = Statu.Ativo;
         //Endereço
         this.bairro = "";
         this.cidade = "";
@@ -56,25 +57,27 @@ public class Fornecedor {
         this.numero = 0;
         this.rua = "";
         this.cep = "00000000";
+        
 
     }
 
-    public Fornecedor(int id, String nome, String cnpj, String rs, String endereço, String email, String bairro, String estado, String rua, String cidade, int numero, String complemento, String cep) {
+    public Fornecedor(int id, String nome, String cnpj, String rs, String email, String bairro, Estado estado, String rua, String cidade, int numero, String complemento, String cep, Statu statu) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
         this.rs = rs;
         this.email = email;
-        //Endereço
         this.bairro = bairro;
-        this.cidade = cidade;
-        this.complemento = complemento;
-        this.estado = Estado.AC;
-        this.numero = numero;
+        this.estado = estado;
         this.rua = rua;
+        this.cidade = cidade;
+        this.numero = numero;
+        this.complemento = complemento;
         this.cep = cep;
-
+        this.statu = statu;
     }
+
+    
 
     public int getId() {
         return id;
@@ -211,9 +214,19 @@ public class Fornecedor {
             throw new ErroValidacaoException("Email Inválido!");
         }
     }
+
+    public Statu getStatu() {
+        return statu;
+    }
+
+    public void setStatu(Statu statu) {
+        this.statu = statu;
+    }
     
-    public String toString(){
-        return this.nome;
+        
+    @Override
+    public String toString() {
+         return this.nome ;
     }
 
 }

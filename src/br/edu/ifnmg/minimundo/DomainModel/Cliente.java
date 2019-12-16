@@ -22,7 +22,7 @@ public class Cliente {
     private int numero;
     private String complemento;
     private String cep;
-    private int statu;
+    private Statu statu;
      
     private Pattern regex_cpf = Pattern.compile("\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}");
     private Pattern regex_cep = Pattern.compile("\\d{5}\\-?\\d{3}");
@@ -35,7 +35,7 @@ public Cliente() {
         this.cpf = "00000000000";       
         this.telefones = new ArrayList<>();
         this.email = "";
-        this.statu = 0;
+        this.statu = Statu.Ativo;
         //Endereço
         this.bairro = "";
         this.cidade = "";
@@ -47,25 +47,24 @@ public Cliente() {
         
     }
 
-
-public Cliente(int id, String nome, String cpf, List<String> telefones,String email,int statu,String bairro,String estado,String rua,String cidade,int numero,String complemento,String cep) {
+    public Cliente(int id, String nome, String cpf, String email, List<String> telefones, String bairro, Estado estado, String rua, String cidade, int numero, String complemento, String cep, Statu statu) {
         this.id = id;
         this.nome = nome;
-        this.cpf = cpf;        
-        this.telefones = new ArrayList<>();
+        this.cpf = cpf;
         this.email = email;
-        this.statu = statu;
-        //Endereço
+        this.telefones = telefones;
         this.bairro = bairro;
-        this.cidade = cidade;
-        this.complemento = complemento;
-        this.estado = Estado.AC;
-        this.numero = numero;
+        this.estado = estado;
         this.rua = rua;
+        this.cidade = cidade;
+        this.numero = numero;
+        this.complemento = complemento;
         this.cep = cep;
-        
-        
-    }        
+        this.statu = statu;
+    }
+
+
+  
 
    
     public int getId() {
@@ -206,13 +205,15 @@ public Cliente(int id, String nome, String cpf, List<String> telefones,String em
             throw new ErroValidacaoException("Cep Inválido!");
     }
 
-    public int getStatu() {
+    public Statu getStatu() {
         return statu;
     }
 
-    public void setStatu(int statu) {
+    public void setStatu(Statu statu) {
         this.statu = statu;
     }
+
+   
     
     
 

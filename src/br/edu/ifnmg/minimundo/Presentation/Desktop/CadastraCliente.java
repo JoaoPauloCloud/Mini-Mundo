@@ -41,7 +41,6 @@ public class CadastraCliente extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jButton2 = new javax.swing.JButton();
         scrollPane1 = new java.awt.ScrollPane();
@@ -74,7 +73,6 @@ public class CadastraCliente extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTelefones = new javax.swing.JList<>();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -201,7 +199,6 @@ public class CadastraCliente extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtnome, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                         .addComponent(jLabel2)
@@ -223,7 +220,8 @@ public class CadastraCliente extends javax.swing.JFrame {
                         .addComponent(numero)
                         .addComponent(txtnumero))
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CaixaTelefones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CaixaTelefones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(968, 968, 968))
         );
         jPanel1Layout.setVerticalGroup(
@@ -244,8 +242,8 @@ public class CadastraCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtestado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtcidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -277,19 +275,6 @@ public class CadastraCliente extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Cliente", jPanel1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1451, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 980, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Telefones", jPanel2);
-
         scrollPane1.add(jTabbedPane1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 2, 14)); // NOI18N
@@ -317,147 +302,11 @@ public class CadastraCliente extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE))
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cbxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxEstadoActionPerformed
-
-    private void txtcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcpfActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        
-        //filtro = new Cliente();
-        System.out.print(filtro.getTelefones());
-        
-        try {
-            filtro.setNome(txtnome.getText());
-            filtro.setCpf(txtcpf.getText());
-            filtro.setEmail(txtemail.getText());
-            //Endereço
-            filtro.setCidade(txtcidade.getText());
-            filtro.setCep(txtcep.getText());
-            filtro.setBairro(txtbairro.getText());
-            filtro.setRua(txtrua.getText());
-            filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
-            filtro.setComplemento(txtcomplemento.getText());
-            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
-            
-        } catch (ErroValidacaoException ex) {
-            JOptionPane.showMessageDialog(null,"" + ex.getMessage());
-            return;
-        }
-        
-        if (repo.Salvar(filtro)) {
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
-            } else {
-            JOptionPane.showMessageDialog(null, "Informações invalidas");
-            }
-            
-            
-            /*
-            int i = 0;
-        
-            if (txtnome.getText().length() > 0) {
-            try {
-            filtro.setNome(txtnome.getText());
-            } catch (ErroValidacaoException ex) {
-            Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (!txtcpf.getText().isEmpty() && txtcpf.getText().length() >= 11) {
-            try {
-            filtro.setCpf(txtcpf.getText());
-            } catch (ErroValidacaoException ex) {
-            Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (txtemail.getText().length() > 0) {
-            filtro.setEmail(txtemail.getText());
-            //Endereço
-            if (txtcidade.getText().length() > 0) {
-            filtro.setCidade(txtcidade.getText());
-            
-            if (txtcep.getText().length() > 0) {
-            filtro.setCep(txtcep.getText());
-            
-            if (txtbairro.getText().length() > 0) {
-            filtro.setBairro(txtbairro.getText());
-            
-            if (txtrua.getText().length() > 0) {
-            
-            try {
-            filtro.setRua(txtrua.getText());
-            } catch (ErroValidacaoException ex) {
-            Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (txtnumero.getText().length() > 0) {
-            filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
-            if (txtcomplemento.getText().length() > 0) {
-            filtro.setComplemento(txtcomplemento.getText());
-            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
-            } else {
-            JOptionPane.showMessageDialog(null, "Complemento não pode ficar em branco");
-            i = 1;
-            }
-
-            } else {
-            JOptionPane.showMessageDialog(null, "Numero não pode ficar em branco");
-            i = 1;
-            }
-            
-            } else {
-            JOptionPane.showMessageDialog(null, "Rua não pode ficar em branco");
-            i = 1;
-            }
-            
-            } else {
-            JOptionPane.showMessageDialog(null, "Bairro não pode ficar em branco");
-            i = 1;
-            }
-            
-            } else {
-            JOptionPane.showMessageDialog(null, "Cep não pode ficar em branco");
-            i = 1;
-            }
-            
-            } else {
-            JOptionPane.showMessageDialog(null, "Cidade não pode ficar em branco");
-            i = 1;
-            }
-            
-            } else {
-            JOptionPane.showMessageDialog(null, "Email não pode ficar em branco");
-            i = 1;
-            
-            }
-            } else {
-            JOptionPane.showMessageDialog(null, "CPF não pode ficar em branco");
-            i = 1;
-            
-            }
-            } else {
-            JOptionPane.showMessageDialog(null, "Nome não pode ficar em branco");
-            i = 1;
-            
-            }
-            if (i != 1) {
-            if (repo.Salvar(filtro)) {
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
-            } else {
-            JOptionPane.showMessageDialog(null, "Informações invalidas");
-            }
-            
-            }*/
-        
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -465,9 +314,10 @@ public class CadastraCliente extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txttelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefoneActionPerformed
+    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_txttelefoneActionPerformed
+        txttelefone.setText( tblTelefones.getSelectedValue() );
+    }//GEN-LAST:event_tblTelefonesMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
@@ -484,10 +334,142 @@ public class CadastraCliente extends javax.swing.JFrame {
         atualizarTelefones();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void tblTelefonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTelefonesMouseClicked
+    private void txttelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefoneActionPerformed
         // TODO add your handling code here:
-        txttelefone.setText( tblTelefones.getSelectedValue() );
-    }//GEN-LAST:event_tblTelefonesMouseClicked
+    }//GEN-LAST:event_txttelefoneActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+        //filtro = new Cliente();
+        //System.out.print(filtro.getTelefones());
+
+        try {
+            filtro.setNome(txtnome.getText());
+            filtro.setCpf(txtcpf.getText());
+            filtro.setEmail(txtemail.getText());
+            //Endereço
+            filtro.setCidade(txtcidade.getText());
+            filtro.setCep(txtcep.getText());
+            filtro.setBairro(txtbairro.getText());
+            filtro.setRua(txtrua.getText());
+            filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
+            filtro.setComplemento(txtcomplemento.getText());
+            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
+
+        } catch (ErroValidacaoException ex) {
+            JOptionPane.showMessageDialog(null,"" + ex.getMessage());
+            return;
+        }
+
+        if (repo.Salvar(filtro)) {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Informações invalidas");
+        }
+
+        /*
+        int i = 0;
+
+        if (txtnome.getText().length() > 0) {
+            try {
+                filtro.setNome(txtnome.getText());
+            } catch (ErroValidacaoException ex) {
+                Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (!txtcpf.getText().isEmpty() && txtcpf.getText().length() >= 11) {
+                try {
+                    filtro.setCpf(txtcpf.getText());
+                } catch (ErroValidacaoException ex) {
+                    Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if (txtemail.getText().length() > 0) {
+                    filtro.setEmail(txtemail.getText());
+                    //Endereço
+                    if (txtcidade.getText().length() > 0) {
+                        filtro.setCidade(txtcidade.getText());
+
+                        if (txtcep.getText().length() > 0) {
+                            filtro.setCep(txtcep.getText());
+
+                            if (txtbairro.getText().length() > 0) {
+                                filtro.setBairro(txtbairro.getText());
+
+                                if (txtrua.getText().length() > 0) {
+
+                                    try {
+                                        filtro.setRua(txtrua.getText());
+                                    } catch (ErroValidacaoException ex) {
+                                        Logger.getLogger(CadastraCliente.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                    if (txtnumero.getText().length() > 0) {
+                                        filtro.setNumero(Integer.parseInt(txtnumero.getText().trim()));
+                                        if (txtcomplemento.getText().length() > 0) {
+                                            filtro.setComplemento(txtcomplemento.getText());
+                                            filtro.setEstado(Estado.valueOf(cbxEstado.getSelectedItem().toString()));
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Complemento não pode ficar em branco");
+                                            i = 1;
+                                        }
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Numero não pode ficar em branco");
+                                        i = 1;
+                                    }
+
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Rua não pode ficar em branco");
+                                    i = 1;
+                                }
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Bairro não pode ficar em branco");
+                                i = 1;
+                            }
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Cep não pode ficar em branco");
+                            i = 1;
+                        }
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cidade não pode ficar em branco");
+                        i = 1;
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Email não pode ficar em branco");
+                    i = 1;
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF não pode ficar em branco");
+                i = 1;
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Nome não pode ficar em branco");
+            i = 1;
+
+        }
+        if (i != 1) {
+            if (repo.Salvar(filtro)) {
+                JOptionPane.showMessageDialog(null, "Cadastro realizado com suceso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Informações invalidas");
+            }
+
+        }*/
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cbxEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxEstadoActionPerformed
+
+    private void txtcpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcpfActionPerformed
 
     private void atualizarTelefones(){
         String[] tel = new String[filtro.getTelefones().size()];
@@ -553,7 +535,6 @@ public class CadastraCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel numero;

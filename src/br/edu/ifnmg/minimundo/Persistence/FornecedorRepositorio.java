@@ -31,7 +31,7 @@ public class FornecedorRepositorio extends BancoDados {
                 sql.setString(1, obj.getcnpj().replace(".", "").replace("-", ""));
                 sql.setString(2, obj.getNome());
                 sql.setString(3, obj.getRs());
-                sql.setString(4, obj.getEmail());
+                sql.setString(4, obj.getEmail().replace("@", "").replace(".", ""));
                 //Endereço
                 sql.setString(5, obj.getBairro());
                 sql.setString(6, obj.getEstado().name());
@@ -56,7 +56,7 @@ public class FornecedorRepositorio extends BancoDados {
                 sql.setString(1, obj.getcnpj());
                 sql.setString(2, obj.getNome());
                 sql.setString(3, obj.getRs());
-                sql.setString(4, obj.getEmail());
+                sql.setString(4, obj.getEmail().replace("@", "").replace(".", ""));
                 //Endereço
                 sql.setString(5, obj.getBairro());
                 sql.setString(6, obj.getEstado().name());
@@ -167,10 +167,11 @@ public class FornecedorRepositorio extends BancoDados {
                 try {
                     fornecedor.setId(resultado.getInt("id"));
                     fornecedor.setNome(resultado.getString("nome"));
+                    
                     fornecedor.setRs(resultado.getString("rs"));
                     fornecedor.setcnpj(resultado.getString("cnpj"));
-                    fornecedor.setEmail(resultado.getString("email"));
-                                      
+                    //fornecedor.setEmail(resultado.getString("email"));
+                     //System.out.print(fornecedor.getEmail());                 
                     //Endereço
                     fornecedor.setBairro(resultado.getString("bairro"));
                     fornecedor.setEstado(Estado.valueOf(resultado.getString("estado")));
